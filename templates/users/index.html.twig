@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users index{% endblock %}
+
+{% block body %}
+
+   {{ block("MenuTop", "Menus/MenuTop.html.twig") }}
+   <div class="app-main">
+    {{ block("MenuLeft", "Menus/MenuLeft.html.twig") }}
+
+
+ <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-diamond icon-gradient bg-strong-bliss"></i>
+                                </div>
+                                <div>Dashboard
+                                    <div class="page-title-subheading">Découvrez votre tableau de bord</div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+               
+                    <div class="tabs-animation"> 
+                     <div class="main-card mb-3 card">
+    <div class="card-body">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 149.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Id</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Email</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 106.2px;" aria-label="Office: activate to sort column ascending">Roles</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 54.2px;" aria-label="Age: activate to sort column ascending">IsVerified</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 110.2px;" aria-label="Start date: activate to sort column ascending">actions</th>
+              
+            
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for user in users %}
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1 dtr-control">{{ user.id }}</td>
+                                    <td class="sorting_1 dtr-control">{{ user.email }}</td>
+                                    <td class="sorting_1 dtr-control">
+                                      {% for role in user.roles %}
+                                        {% if role == "ROLE_USER" %}
+                                            Utilisateur
+                                        {% elseif role == "ROLE_ADMIN" %}
+                                            Administrateur
+                                        {% endif %}
+                                    {% endfor %}
+                                  
+                                    
+                                    </td>
+                                
+                                    <td class="sorting_1 dtr-control">{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                                    <td class="sorting_1 dtr-control">
+                                        <a href="{{ path('app_users_show', {'id': user.id}) }}">show</a>
+                                        <a href="{{ path('app_users_edit', {'id': user.id}) }}">edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1 dtr-control" colspan="6">no records found</td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                 
+                    </table>
+                </div>
+            </div>
+    
+    
+        </div>
+    </div>
+</div>
+                    
+         
+
+  
+
+                     
+                    </div>
+                </div>
+
+
+   
+    </div>
+{% endblock %}
+
+   {% block javascripts %}
+   <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+ 
+        <script>
+$(document).ready( function () {
+    $('#example').DataTable({
+
+    "language": {
+         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+     }
+
+            });
+
+   
+} );
+
+
+        </script>
+        {% endblock %}
+
