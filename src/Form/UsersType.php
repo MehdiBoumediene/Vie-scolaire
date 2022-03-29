@@ -22,16 +22,17 @@ class UsersType extends AbstractType
             ->add('email')
             ->add('roles')
             ->add('password', PasswordType::class)
-            ->add('isVerified')
+            ->remove('isVerified')
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Utilisateur' => 'ROLE_USER',
                     'Administrateur' => 'ROLE_ADMIN'
                 ],
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => true,
                 'label' => 'Rôles' 
             ])
+            
         ;
     }
 

@@ -44,8 +44,14 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+        
             $plainpwd = $user->getPassword();
             $encoded = $this->passwordEncoder->encodePassword($user,$plainpwd);
+            $date = new \DateTimeImmutable('now');
+         
+            $user->setCreatedBy($this->getUser()->getEmail());
+            
+            $user->setCreatedAt($date);
             $user->setPassword($encoded);
             $usersRepository->add($user);
             return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);

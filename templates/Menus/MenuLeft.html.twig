@@ -39,7 +39,10 @@
                                     <i class="metismenu-icon pe-7s-diamond"></i>Dashboard
                                     </a>
                                 </li>
-                            <li class="app-sidebar__heading">Menu Administrateur</li>
+                                       {% if is_granted('ROLE_ADMIN') %}
+
+                                        {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                                  <li class="app-sidebar__heading">Menu Administrateur</li>
                          <li>
                                 <a href="#">
                                 <i class="metismenu-icon pe-7s-config"></i> Administration
@@ -123,6 +126,12 @@
                     
                                 </ul>
                             </li>
+                                        {% endif %}
+
+                                        {% else %}
+
+                                    {% endif %}
+                          
                             <li class="app-sidebar__heading">Menu Etudiant</li>
                             <li>
                                 <a href="#">

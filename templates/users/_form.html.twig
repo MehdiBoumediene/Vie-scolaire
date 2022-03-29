@@ -1,4 +1,22 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+  
+   <div class="form-row">
+        <div class="col-md-6">
+        {{ form_row(form.email,{'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.email) }}
+        </div>
+        <div class="col-md-6">
+       {{ form_row(form.password,{'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.password) }}
+        </div>
+
+    </div>
+    <br>
+    {{ form_row(form.roles,{'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.roles) }}
+    <br>
+ 
+    <br>
+    <button class="mt-1 btn btn-primary">{{ button_label|default('sauvegarder') }}</button> ou <a href="{{ path('app_users_index') }}">Retour à la liste</a>
+  
 {{ form_end(form) }}
