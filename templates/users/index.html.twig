@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users index{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
 
@@ -15,13 +15,25 @@
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                    <i class="pe-7s-diamond icon-gradient bg-strong-bliss"></i>
+                                    <i class="lnr-users icon-gradient bg-strong-bliss"></i>
                                 </div>
-                                <div>Dashboard
-                                    <div class="page-title-subheading">Découvrez votre tableau de bord</div>
+                                <div>Utilisateurs
+                                    <div class="page-title-subheading">Découvrez la gestion de vos utilisateurs</div>
                                 </div>
                             </div>
+                           <div class="page-title-actions">
                         
+                            <div class="d-inline-block dropdown">
+                            <a href="{{path('app_users_new')}}">
+                                <button  class="btn-shadow btn btn-info">
+                                    <span class="btn-icon-wrapper pr-2 opacity-7">
+                                        <i class="fa fa-plus fa-w-20"></i>
+                                    </span>
+                                    Ajouter un utilisateur
+                                </button>
+                               </a>
+                            </div>
+                        </div>
                         </div>
                     </div>
                
@@ -35,10 +47,11 @@
                     <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 149.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Id</th>
+   
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Email</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 106.2px;" aria-label="Office: activate to sort column ascending">Roles</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 54.2px;" aria-label="Age: activate to sort column ascending">IsVerified</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Date de création</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Créé par</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 110.2px;" aria-label="Start date: activate to sort column ascending">actions</th>
               
             
@@ -48,10 +61,10 @@
 
                             {% for user in users %}
                                 <tr role="row" class="odd">
-                                    <td class="sorting_1 dtr-control">{{ user.id }}</td>
+                         
                                     <td class="sorting_1 dtr-control">{{ user.email }}</td>
                                     <td class="sorting_1 dtr-control">
-                                      {% for role in user.roles %}
+                                      {% for role in user.roles[0] %}
                                         {% if role == "ROLE_USER" %}
                                             Utilisateur
                                         {% elseif role == "ROLE_ADMIN" %}
@@ -61,11 +74,14 @@
                                   
                                     
                                     </td>
-                                
-                                    <td class="sorting_1 dtr-control">{{ user.isVerified ? 'Yes' : 'No' }}</td>
+
+                                    <td class="sorting_1 dtr-control">{{ user.createdAt|date('d-m-Y H:i') }}</td>
+                                    <td class="sorting_1 dtr-control">{{ user.createdBy }}</td>
+                                    
                                     <td class="sorting_1 dtr-control">
-                                        <a href="{{ path('app_users_show', {'id': user.id}) }}">show</a>
-                                        <a href="{{ path('app_users_edit', {'id': user.id}) }}">edit</a>
+                                    <a href="{{ path('app_users_show', {'id': user.id}) }}"><button class="mb-2 mr-2 btn-icon btn-icon btn-pill btn btn-link" style="color:#31a66a;" ><i class="lnr-eye btn-icon-wrapper"> </i>Voir</button></a>
+                                        
+                                        <a href="{{ path('app_users_edit', {'id': user.id}) }}"><button class="mb-2 mr-2 btn-icon btn-pill btn btn-link" ><i class="pe-7s-tools btn-icon-wrapper"> </i>Modifier</button></a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -86,39 +102,10 @@
 </div>
                     
          
-
-  
-
                      
                     </div>
                 </div>
-
-
    
-    </div>
+    </div> 
+
 {% endblock %}
-
-   {% block javascripts %}
-   <script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
- 
-        <script>
-$(document).ready( function () {
-    $('#example').DataTable({
-
-    "language": {
-         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
-     }
-
-            });
-
-   
-} );
-
-
-        </script>
-        {% endblock %}
-
