@@ -25,8 +25,13 @@ class UsersType extends AbstractType
             ->remove('isVerified')
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    'Utilisateur' => 'ROLE_USER',
-                    'Administrateur' => 'ROLE_ADMIN'
+                    'Étudiant' => 'ROLE_ETUDIANT',
+                    'Intervenant' => 'ROLE_INTERVENANT',
+                    'Entreprise' => 'ROLE_ENTREPRISE',
+                    'Tuteur' => 'ROLE_TUTEUR',
+                    'Administrateur' => 'ROLE_ADMIN',
+                    'Agent' => 'ROLE_AGENT',
+                    
                 ],
                 'expanded' => false,
                 'multiple' => true,

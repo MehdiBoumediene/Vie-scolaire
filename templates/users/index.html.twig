@@ -64,13 +64,23 @@
                          
                                     <td class="sorting_1 dtr-control">{{ user.email }}</td>
                                     <td class="sorting_1 dtr-control">
-                                      {% for role in user.roles[0] %}
-                                        {% if role == "ROLE_USER" %}
-                                            Utilisateur
-                                        {% elseif role == "ROLE_ADMIN" %}
+                                      
+                                        {% if user.roles[0] == "ROLE_USER" %}
+                                            Étudiant
+                                        {% elseif user.roles[0] == "ROLE_ADMIN" %}
                                             Administrateur
+                                        {% elseif user.roles[0] == "ROLE_ETUDIANT" %}
+                                            Étudiant
+                                        {% elseif user.roles[0] == "ROLE_INTERVENANT" %}
+                                            Intervenant
+                                        {% elseif user.roles[0] == "ROLE_ENTREPRISE" %}
+                                            Entreprise    
+                                        {% elseif user.roles[0] == "ROLE_TUTEUR" %}
+                                            Tuteur   
+                                        {% elseif user.roles[0] == "ROLE_AGENT" %}
+                                            Agent  
                                         {% endif %}
-                                    {% endfor %}
+                                    
                                   
                                     
                                     </td>
