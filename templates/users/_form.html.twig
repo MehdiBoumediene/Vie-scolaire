@@ -24,7 +24,12 @@
         <div class="col-md-3">
             {{ form_row(form.entreprise,{'attr': {'class': 'form-control'}}) }}
              {{ form_errors(form.entreprise) }}
+             <br>
+              {{ form_row(form.isVerified,{'attr': {'class': 'checkbox'}}) }}
+             {{ form_errors(form.isVerified) }}
         </div>
+           
+        
 
     </div>
  

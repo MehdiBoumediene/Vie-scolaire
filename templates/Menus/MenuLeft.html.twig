@@ -41,10 +41,10 @@
                                     <i class="metismenu-icon pe-7s-diamond"></i>Dashboard
                                     </a>
                                 </li>
-                                       {% if is_granted('ROLE_ADMIN') %}
+                     {% if is_granted('ROLE_ADMIN') %}
 
                                         {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                                  <li class="app-sidebar__heading">Menu Administrateur</li>
+                                  <li class="app-sidebar__heading">Menu </li>
                          <li {% if route_name == "app_classes_index" %} class="mm-active" {% elseif route_name == "app_blocs_index" %} class="mm-active" {% elseif route_name ==  "app_blocs_new" %} class="mm-active"  {% elseif route_name == "app_blocs_edit" %} class="mm-active"  {% elseif route_name == "app_blocs_show" %} class="mm-active" {% elseif route_name == "app_modules_index" %} class="mm-active" {% elseif route_name == "app_modules_new" %} class="mm-active" {% elseif route_name == "app_modules_edit" %} class="mm-active" {% elseif route_name == "app_modules_show"  %} class="mm-active" {% elseif route_name == "app_intervenants_index" %} class="mm-active"  {% elseif route_name == "app_intervenants_new" %} class="mm-active"  {% elseif route_name ==  "app_intervenants_edit" %} class="mm-active" {% elseif route_name ==  "app_intervenants_show" %} class="mm-active" {% elseif route_name == "app_etudiants_index" %} class="mm-active" {% elseif route_name == "app_etudiants_new" %} class="mm-active" {% elseif route_name ==  "app_etudiants_edit" %} class="mm-active" {% elseif route_name ==  "app_etudiants_show" %}  class="mm-active" {% elseif route_name == "app_entreprises_index" %} class="mm-active" {% elseif route_name ==  "app_entreprises_new" %} class="mm-active"  {% elseif route_name ==  "app_entreprises_edit" %} class="mm-active" {% elseif route_name ==  "app_entreprises_show" %} class="mm-active" {% elseif route_name == "app_tuteurs_index" %} class="mm-active" {% elseif route_name ==  "app_tuteurs_new" %} class="mm-active" {% elseif route_name == "app_tuteurs_edit" %} class="mm-active"  {% elseif route_name == "app_tuteurs_show"  %} class="mm-active" {% elseif route_name == "app_users_index" %} class="mm-active" {% elseif route_name == "app_users_new" %} class="mm-active" {% elseif route_name ==  "app_users_edit" %} class="mm-active" {% elseif route_name ==  "app_users_show" %} class="mm-active" {% else %}  class=" "  {% endif %}>
                                 <a href="#">
                                 <i class="metismenu-icon pe-7s-config"></i> Administration
@@ -133,8 +133,8 @@
                                         {% else %}
 
                                     {% endif %}
-                          
-                            <li class="app-sidebar__heading">Menu Etudiant</li>
+                            {% if is_granted('ROLE_ETUDIANT', 'ROLE_ADMIN')  %}
+                            <li class="app-sidebar__heading">Menu </li>
                             <li>
                                 <a href="#">
                                 <i class="metismenu-icon lnr-graduation-hat"></i> Scolarité
@@ -143,26 +143,26 @@
                                 <ul>
                             <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Calendrier
+                                <i class="metismenu-icon pe-7s-display2"></i> Mon calendrier
                                 <i class="metismenu-state-icon "></i>
                                 </a>
                             </li>
                           <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Absences
+                                <i class="metismenu-icon pe-7s-display2"></i> Mes absences
                                 <i class="metismenu-state-icon "></i>
                                 </a>
                             </li>
                       
                             <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Parcours Pro
+                                <i class="metismenu-icon pe-7s-display2"></i> Mon parcours pro
                                 <i class="metismenu-state-icon "></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Stage en entreprise
+                                <i class="metismenu-icon pe-7s-display2"></i> Mon stage en entreprise
                                 <i class="metismenu-state-icon "></i>
                                 </a>
                             </li>
@@ -183,29 +183,46 @@
                                 </li>
                                      <li>
                                     <a href="#">
-                                    <i class="metismenu-icon pe-7s-note2"></i>Projets
+                                    <i class="metismenu-icon pe-7s-note2"></i> Mes projets
                                     </a>
                                 </li>
 
-                                 <li class="app-sidebar__heading"> Menu Intervenant</li>
+                                      {% else %}
+
+                                    {% endif %}
+
+                                  {% if is_granted('ROLE_INTERVENANT', 'ROLE_ADMIN')  %}
+                                 <li class="app-sidebar__heading"> Menu</li>
                                  <li>
                                 <a href="#">
                                 <i class="metismenu-icon pe-7s-user"></i> Intervenant
                                 <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
+
+                           <li>
+                                <a href="#">
+                                <i class="metismenu-icon pe-7s-display2"></i> Mon parcours pro
+                                <i class="metismenu-state-icon "></i>
+                                </a>
+                            </li>      
+
                           <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Parcours Pro
+                                <i class="metismenu-icon pe-7s-display2"></i> Mon calendrier
                                 <i class="metismenu-state-icon "></i>
                                 </a>
-                            </li>
-                            <li>
+                          </li>
+                          
+                             <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Calendrier
+                                <i class="metismenu-icon pe-7s-display2"></i> Mes étudiants
                                 <i class="metismenu-state-icon "></i>
                                 </a>
-                            </li>
+                          </li>
+                           
+                        
+
 
                                  <li>
                                 <a href="#">
@@ -217,8 +234,13 @@
                       
                                 </ul>
                             </li>
+                            {% else %}
 
-                                <li class="app-sidebar__heading">Menu Entreprise</li>
+                            {% endif %}
+
+                                 {% if is_granted('ROLE_TUTEUR', 'ROLE_ADMIN')  %}
+
+                                <li class="app-sidebar__heading">Menu </li>
                                  <li>
                                 <a href="#">
                                 <i class="metismenu-icon lnr-apartment"></i> Entreprise
@@ -227,13 +249,13 @@
                                 <ul>
                           <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Tuteurs
+                                <i class="metismenu-icon pe-7s-display2"></i> Nos tuteurs
                                 <i class="metismenu-state-icon "></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                <i class="metismenu-icon pe-7s-display2"></i> Etudiants
+                                <i class="metismenu-icon pe-7s-display2"></i> Nos étudiants
                                 <i class="metismenu-state-icon "></i>
                                 </a>
                             </li>
@@ -241,6 +263,9 @@
                     
                                 </ul>
                             </li>
+                              {% else %}
+
+                            {% endif %}
 
                                 <li class="app-sidebar__heading">Informations</li>
                                  <li>
