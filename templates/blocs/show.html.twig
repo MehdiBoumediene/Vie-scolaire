@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blocs{% endblock %}
+
+{% block body %}
+    <h1>Blocs</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bloc.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ bloc.nom }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ bloc.createdAt ? bloc.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Created_by</th>
+                <td>{{ bloc.createdBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_blocs_index') }}">back to list</a>
+
+    <a href="{{ path('app_blocs_edit', {'id': bloc.id}) }}">edit</a>
+
+    {{ include('blocs/_delete_form.html.twig') }}
+{% endblock %}

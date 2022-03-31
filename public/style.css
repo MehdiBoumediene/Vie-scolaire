@@ -1,0 +1,15 @@
+.app-header.header-text-light .app-header__logo .logo-src {
+  background: url(assets/logoWhite.svg) !important;
+}
+.app-header__logo .logo-src {
+  height: 50px;
+  width: 160px;
+}
+
+.paginate_button.current {
+  background: #3f6ad8;
+  color: white;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
