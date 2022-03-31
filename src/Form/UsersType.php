@@ -26,7 +26,11 @@ class UsersType extends AbstractType
             ->add('email')
             ->add('roles')
             ->add('password', PasswordType::class)
-            ->remove('isVerified')
+            ->add('isVerified',CheckboxType::class,[
+                'label' => 'Compte Activé', 
+                'data' => true,
+           
+            ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Étudiant' => 'ROLE_ETUDIANT',
@@ -39,6 +43,7 @@ class UsersType extends AbstractType
                 ],
                 'expanded' => false,
                 'multiple' => true,
+                'required' => false,
                 'label' => 'Rôles' 
             ])
 
@@ -49,7 +54,8 @@ class UsersType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ])
 
             ->add('entreprise', EntityType::class, [
