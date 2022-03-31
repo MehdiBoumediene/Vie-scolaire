@@ -13,6 +13,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Classes;
+use App\Entity\Entreprises;
 
 class UsersType extends AbstractType
 {
@@ -36,6 +40,27 @@ class UsersType extends AbstractType
                 'expanded' => false,
                 'multiple' => true,
                 'label' => 'Rôles' 
+            ])
+
+            ->add('classe', EntityType::class, [
+                'class' => Classes::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+                'multiple' => true
+            ])
+
+            ->add('entreprise', EntityType::class, [
+                'class' => Entreprises::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+                'required' => false
+                
             ])
             
         ;

@@ -41,9 +41,15 @@ class Classes
      */
     private $blocs;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="classe")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->blocs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,6 +118,33 @@ class Classes
             if ($bloc->getClasse() === $this) {
                 $bloc->setClasse(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Users>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeClasse($this);
         }
 
         return $this;
