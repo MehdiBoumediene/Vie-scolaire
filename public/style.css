@@ -13,3 +13,12 @@
   margin: 5px;
   cursor: pointer;
 }
+.checkbox {
+  margin-left: 5px;
+}
+label[for="users_isVerified"] {
+  display: none;
+}
+#users_isVerified {
+  display: none;
+}

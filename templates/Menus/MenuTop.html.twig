@@ -687,9 +687,9 @@
                                                                     <img width="42" class="rounded-circle" src="{{asset('assets/images/avatars/1.jpg')}}" alt="">
                                                                 </div>
                                                                 <div class="widget-content-left">
-                                                                {% if is_granted('ROLE_USER') %}
+                                                                {% if is_granted('ROLE_ETUDIANT') %}
                                                             
-                                                                {% if app.user.roles[0] == "ROLE_USER" %}
+                                                                {% if app.user.roles[0] == "ROLE_ETUDIANT" %}
                                                                 <div class="widget-heading">{{app.user.email}}</div>
                                                                 <div class="widget-subheading"> Étudiant </div>
                                                                 {% endif %}
@@ -701,6 +701,24 @@
                                                                 {% if app.user.roles[0] == "ROLE_ADMIN" %}
                                                                   <div class="widget-heading">{{app.user.email}}</div>
                                                                 <div class="widget-subheading"> Administrateur </div>
+                                                                {% endif %}
+
+                                                            {% endif %}
+
+                                                                {% if is_granted('ROLE_INTERVENANT') %}
+
+                                                                {% if app.user.roles[0] == "ROLE_INTERVENANT" %}
+                                                                  <div class="widget-heading">{{app.user.email}}</div>
+                                                                <div class="widget-subheading"> Intervenant </div>
+                                                                {% endif %}
+
+                                                            {% endif %}
+
+                                                                {% if is_granted('ROLE_TUTEUR') %}
+
+                                                                {% if app.user.roles[0] == "ROLE_TUTEUR" %}
+                                                                  <div class="widget-heading">{{app.user.email}}</div>
+                                                                <div class="widget-subheading"> Tuteur </div>
                                                                 {% endif %}
 
                                                             {% endif %}
@@ -716,11 +734,7 @@
                                             <div class="scroll-area-xs" style="height: 150px;">
                                                 <div class="scrollbar-container ps">
                                                     <ul class="nav flex-column">
-                                                        <li class="nav-item-header nav-item">Mon Compte
-                                                        </li>
-                                                          <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Mon profil</a>
-                                                        </li>
+                                                       
                                                          <li class="nav-item">
                                                             <a href="javascript:void(0);" class="nav-link">Mes informations</a>
                                                         </li>
@@ -737,9 +751,9 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                         {% if is_granted('ROLE_USER') %}
+                                         {% if is_granted('ROLE_ETUDIANT') %}
                                        
-                                            {% if app.user.roles[0] == "ROLE_USER" %}
+                                            {% if app.user.roles[0] == "ROLE_ETUDIANT" %}
                                              <div class="widget-heading">{{app.user.email}}</div>
                                             <div class="widget-subheading"> Étudiant </div>
                                             {% endif %}
@@ -752,6 +766,27 @@
                                                {% if app.user.roles[0] == "ROLE_ADMIN" %}
                                                  <div class="widget-heading">{{app.user.email}}</div>
                                             <div class="widget-subheading"> Administrateur </div>
+                                            {% endif %}
+
+                                        {% endif %}
+
+                                            {% if is_granted('ROLE_INTERVENANT') %}
+
+                                          
+                                               {% if app.user.roles[0] == "ROLE_INTERVENANT" %}
+                                                 <div class="widget-heading">{{app.user.email}}</div>
+                                            <div class="widget-subheading"> Intervenant </div>
+                                            {% endif %}
+
+                                        {% endif %}
+
+                                        
+                                            {% if is_granted('ROLE_TUTEUR') %}
+
+                                          
+                                               {% if app.user.roles[0] == "ROLE_TUTEUR" %}
+                                                 <div class="widget-heading">{{app.user.email}}</div>
+                                            <div class="widget-subheading"> Tuteur </div>
                                             {% endif %}
 
                                         {% endif %}
