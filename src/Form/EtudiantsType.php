@@ -28,7 +28,8 @@ class EtudiantsType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple' => true
+                'multiple' => true,
+                'required' =>false
             ])
             ->add('absences')
         ;
