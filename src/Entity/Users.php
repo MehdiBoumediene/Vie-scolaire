@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -53,6 +55,21 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $created_by;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Classes::class, inversedBy="users")
+     */
+    private $classe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Entreprises::class, inversedBy="users")
+     */
+    private $entreprise;
+
+    public function __construct()
+    {
+        $this->classe = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -176,6 +193,42 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedBy(?string $created_by): self
     {
         $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Classes>
+     */
+    public function getClasse(): Collection
+    {
+        return $this->classe;
+    }
+
+    public function addClasse(Classes $classe): self
+    {
+        if (!$this->classe->contains($classe)) {
+            $this->classe[] = $classe;
+        }
+
+        return $this;
+    }
+
+    public function removeClasse(Classes $classe): self
+    {
+        $this->classe->removeElement($classe);
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?Entreprises
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprises $entreprise): self
+    {
+        $this->entreprise = $entreprise;
 
         return $this;
     }
