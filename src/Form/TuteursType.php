@@ -29,6 +29,7 @@ class TuteursType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
+                'required'=> false
             ])
         ;
     }

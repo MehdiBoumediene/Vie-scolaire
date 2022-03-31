@@ -35,7 +35,8 @@ class ModulesType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ])
             ->add('etudiants', EntityType::class, [
                 'class' => Etudiants::class,
@@ -44,7 +45,8 @@ class ModulesType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ])
          
         ;
