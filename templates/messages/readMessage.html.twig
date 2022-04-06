@@ -59,7 +59,7 @@
                                 <img width="82" src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
                             </div>
                         </div>
-                        <h4 class="mb-0 text-nowrap">Chad Evans
+                        <h4 class="mb-0 text-nowrap">{{message.sender.email}}
                             <div class="opacity-7">Vu pour la dernière fois en ligne:
                                 <span class="opacity-8">il y a 10 minutes</span>
                             </div>
@@ -86,27 +86,7 @@
                         </small>
                         </div>
                     </div>
-                    <div class="float-right">
-                        <div class="chat-box-wrapper chat-box-wrapper-right">
-                            <div>
-                                <div class="chat-box">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</div>
-                                <small class="opacity-6">
-                                <i class="fa fa-calendar-alt mr-1"></i>
-                                {{message.createdAt|date('d/m/Y h:i')}}
-                                </small>
-                            </div>
-                            <div>
-                                <div class="avatar-icon-wrapper ml-1">
-                                    <div class="badge badge-bottom btn-shine badge-success badge-dot badge-dot-lg">
-                                    </div>
-                                    <div class="avatar-icon avatar-icon-lg rounded">
-                                        <img src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-               
+              
      
 
                 </div>
@@ -151,81 +131,57 @@
 </div>
 </div>
 <div class="widget-content-left">
-<div class="widget-heading">Chad Evans</div>
-<div class="widget-subheading">Vivamus elementum semper nisi.</div>
+<div class="widget-heading">{{message.sender.email}}</div>
+<div class="widget-subheading">
+   {% if message.sender.roles[0] == "ROLE_USER" %}
+        Étudiant
+    {% elseif message.sender.roles[0] == "ROLE_ADMIN" %}
+        Administrateur
+    {% elseif message.sender.roles[0] == "ROLE_ETUDIANT" %}
+        Étudiant
+    {% elseif message.sender.roles[0] == "ROLE_INTERVENANT" %}
+        Intervenant
+    {% elseif message.sender.roles[0] == "ROLE_ENTREPRISE" %}
+        Entreprise    
+    {% elseif message.sender.roles[0] == "ROLE_TUTEUR" %}
+        Tuteur   
+    {% elseif message.sender.roles[0] == "ROLE_AGENT" %}
+        Agent  
+    {% endif %}
+
+
+</div>
 </div>
 </div>
 </div>
 </button>
                 </li>
+ 
+<li class="nav-item">
+    <button type="button" tabindex="0" class="dropdown-item">
+        <div class="widget-content p-0">
+            <div class="widget-content-wrapper">
+                <div class="widget-content-left mr-3">
+                    <div class="avatar-icon-wrapper">
+                        <div class="badge badge-bottom badge-success badge-dot badge-dot-lg">
+                        </div>
+                        <div class="avatar-icon">
+                            <img src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content-left">
+                    <div class="widget-heading">Ella-Rose Henry</div>
+                    <div class="widget-subheading">Etiam sit amet orci eget eros faucibus</div>
+                </div>
+            </div>
+        </div>
+    </button>
+</li>
    
 
             </ul>
-            <div class="app-inner-layout__sidebar-footer pb-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item-divider nav-item"></li>
-                    <li class="nav-item-header nav-item">Amis Hors-ligne</li>
-                    <li class="text-center p-2 nav-item">
-                        <div class="avatar-wrapper avatar-wrapper-overlap">
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/5.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/10.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/7.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/8.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/1.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper">
-                                <div class="badge badge-bottom badge-danger badge-dot badge-dot-lg"></div>
-                                <div class="avatar-icon rounded">
-                                    <img src="{{asset('assets/images/avatars/4.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="avatar-icon-wrapper avatar-icon-add">
-                                <div class="avatar-icon rounded"><i>+</i></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item-btn text-center nav-item">
-                        <button class="btn-wide btn-pill btn btn-success btn-sm">Offline Group
-Conversation</button>
-                    </li>
-                </ul>
-            </div>
+           
         </div>
     </div>
 </div>
