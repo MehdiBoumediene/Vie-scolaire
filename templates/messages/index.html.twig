@@ -83,7 +83,7 @@
                         <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
                       </div>
                       <div class="widget-content-left">
-                        <div class="widget-heading">{{message.sender.email }}</div>
+                        <div class="widget-heading"><a href="{{path('app_read_messages', {id: message.id})}}">{{message.sender.email }}</a></div>
                        
                       </div>
                     </div>
@@ -95,7 +95,16 @@
                   <i class="fa fa-calendar-alt opacity-4 mr-2"></i>
                   {{message.createdAt|date('d/m/Y h:i')}}
                 </td>
-                
+             <td class="text-left">
+              {% if message.isRead == 0 %}
+                {% set etat = "Message non lu" %}
+                {% else %}
+                    {% set etat = " Message lu" %}
+                {% endif %}
+
+                {{etat}}
+             
+             </td>
               </tr>
          
               {% endfor %}
