@@ -8,16 +8,18 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\MessagesType;
 use App\Entity\Messages;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UsersRepository;
 
 class MessagesController extends AbstractController
 {
     /**
      * @Route("/messages", name="app_messages")
      */
-    public function index(): Response
+    public function index(UsersRepository $usersRepository): Response
     {
         return $this->render('messages/index.html.twig', [
             'controller_name' => 'MessagesController',
+           
         ]);
     }
 
@@ -58,6 +60,7 @@ class MessagesController extends AbstractController
         $em->persist($message);
         $em->flush();
 
-        return $this->render('messages/readMessage.html.twig', compact("message"));
+        return $this->render('messages/readMessage.html.twig', compact("message") );
+            
     }
 }

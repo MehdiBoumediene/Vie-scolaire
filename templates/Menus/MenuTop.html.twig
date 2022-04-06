@@ -339,7 +339,13 @@
                                 <span class="icon-wrapper icon-wrapper-alt rounded-circle">
                                 <span class="icon-wrapper-bg bg-danger"></span>
                                 <i class="icon text-danger icon-anim-pulse ion-android-mail"></i>
+                                {% if app.user.received|length > 0 %}
                                 <span class="badge badge-dot badge-dot-sm badge-danger">Messages</span>
+
+                                {% else %}
+
+                                {% endif %}
+                                
                                 </span>
                                 </button>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-xl rm-pointers dropdown-menu dropdown-menu-right">
@@ -349,9 +355,12 @@
                                             <div class="menu-header-content text-dark">
                                                 <h5 class="menu-header-title">Messages</h5>
                               
-
+                                                    {% if app.user.received|length >0%}
                                                     <h6 class="menu-header-subtitle">Vous avez <b>{{ app.user.received|length}}</b> messages non lus </h6>
+                                                     {% else %}
+                                                     <h6 class="menu-header-subtitle">Vous avez <b>0</b> messages non lus </h6>
 
+                                                    {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -374,7 +383,7 @@
 
                                                                         <div class="vertical-timeline-element-content bounce-in">
                                                                        
-                                                                            <h4 class="timeline-title {{bold}}"> {{message.sender.email}}:  {{message.objet}} <span class="text-success"> <br> Le {{message.createdAt|date('d/m/Y h:i')}}</span></h4>
+                                                                           <a href="{{path('app_read_messages', {id: message.id})}}"> <h4 class="timeline-title {{bold}}"> {{message.sender.email}}:  {{message.objet}} <span class="text-success"> <br> Le {{message.createdAt|date('d/m/Y h:i')}}</span></h4></a>
                                                                             <span class="vertical-timeline-element-date"></span>
                                                                          
                                                                         </div>

@@ -20,6 +20,7 @@ class BlocsController extends AbstractController
      */
     public function index(BlocsRepository $blocsRepository): Response
     {
+        
         return $this->render('blocs/index.html.twig', [
             'blocs' => $blocsRepository->findAll(),
         ]);
