@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+ {{ block("MenuTop", "Menus/MenuTop.html.twig") }}
+      
+        <div class="app-main">
+         
+                 {{ block("MenuLeft", "Menus/MenuLeft.html.twig") }}
+
+
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-diamond icon-gradient bg-strong-bliss"></i>
+                                </div>
+                                <div>Messagerie
+                                    <div class="page-title-subheading">Découvrez tous vos messages</div>
+                                </div>
+                            </div>
+                               <div class="page-title-actions">
+                        
+                                <div class="d-inline-block dropdown">
+                                 <a href="{{ path('app_envoi_messages') }}">
+                                <button  class="btn-shadow btn btn-info">
+                                    <span class="btn-icon-wrapper pr-2 opacity-7">
+                                        <i class="fa fa-plus fa-w-20"></i>
+                                    </span>
+                                    Nouveau message
+                                </button>
+                               </a>
+                            </div>
+                        </div>
+                    </div>
+               
+                    <div class="tabs-animation">
+                    <br>
+                     
+               {{ form_start(form) }}
+  
+   <div class="form-row">
+        <div class="col-md-8">
+        {{ form_row(form.objet,{'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.objet) }}
+        </div>
+   
+         <div class="col-md-4">
+        {{ form_row(form.recipient,{'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.recipient) }}
+        </div>
+     
+
+    </div>
+    <br>
+       <div class="form-row">
+            <div class="col-md-8">
+                {{ form_row(form.message,{'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.message) }}
+            </div>
+       </div>
+ <br>
+    <button class="mt-1 btn btn-primary">{{ button_label|default('Envoyer') }}</button> ou <a href="{{ path('app_messages') }}">Retour à la liste</a>
+  
+{{ form_end(form) }}
+                    </div>
+                     
+                </div>
+            </div>
+               {{ block("Footer", "Menus/Footer.html.twig") }}
+            </div>
+        </div>
+{% endblock %}
