@@ -22,4 +22,7 @@ label[for="users_isVerified"] {
 #users_isVerified {
   display: none;
 }
-
+.chat-layout.app-inner-layout .app-inner-layout__sidebar {
+  width: 360px;
+  flex: 0 0 275px;
+}

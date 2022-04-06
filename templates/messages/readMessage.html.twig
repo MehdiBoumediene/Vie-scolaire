@@ -36,7 +36,7 @@
                             </div>
                         </div>
                     </div>
-               
+               <br>
                     <div class="tabs-animation">
               <div class="app-inner-layout chat-layout">
 
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <h4 class="mb-0 text-nowrap">{{message.sender.email}}
-                            <div class="opacity-7">Vu pour la dernière fois en ligne:
+                            <div class="opacity-7"> En ligne:
                                 <span class="opacity-8">il y a 10 minutes</span>
                             </div>
                         </h4>
@@ -99,90 +99,93 @@
                 </div>
             </div>
         </div>
-        <div class="app-inner-layout__sidebar card">
-            <div class="app-inner-layout__sidebar-header">
-                <ul class="nav flex-column">
-                    <li class="pt-4 pl-3 pr-3 pb-3 nav-item">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </div>
-                            <input placeholder="Search..." type="text" class="form-control">
-                        </div>
-                    </li>
-                    <li class="nav-item-header nav-item">Amis en-ligne</li>
-                </ul>
-            </div>
-            <ul class="nav flex-column">
+     <div class="app-inner-layout__sidebar card">
+    <ul class="nav flex-column">
+  <br>
+       
+        <li class="nav-item">
+            <a href="{{ path('app_messages') }}" class="nav-link">
+                <i class="nav-link-icon pe-7s-chat"> </i>
+                <span>Boîte de réception</span>
+                <div class="ml-auto badge badge-pill badge-info">8</div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="javascript:void(0);" class="nav-link">
+                <i class="nav-link-icon pe-7s-wallet"> </i>
+                <span>Éléments envoyés</span>
+            
+            </a>
+        </li>
      
-                <li class="nav-item">
-                    <button type="button" tabindex="0" class="dropdown-item active">
-<div class="widget-content p-0">
-<div class="widget-content-wrapper">
-<div class="widget-content-left mr-3">
-<div class="avatar-icon-wrapper">
-<div class="badge badge-bottom badge-success badge-dot badge-dot-lg">
- </div>
-<div class="avatar-icon">
-<img src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
-</div>
-</div>
-</div>
-<div class="widget-content-left">
-<div class="widget-heading">{{message.sender.email}}</div>
-<div class="widget-subheading">
-   {% if message.sender.roles[0] == "ROLE_USER" %}
-        Étudiant
-    {% elseif message.sender.roles[0] == "ROLE_ADMIN" %}
-        Administrateur
-    {% elseif message.sender.roles[0] == "ROLE_ETUDIANT" %}
-        Étudiant
-    {% elseif message.sender.roles[0] == "ROLE_INTERVENANT" %}
-        Intervenant
-    {% elseif message.sender.roles[0] == "ROLE_ENTREPRISE" %}
-        Entreprise    
-    {% elseif message.sender.roles[0] == "ROLE_TUTEUR" %}
-        Tuteur   
-    {% elseif message.sender.roles[0] == "ROLE_AGENT" %}
-        Agent  
-    {% endif %}
-
-
-</div>
-</div>
-</div>
-</div>
-</button>
-                </li>
- 
-<li class="nav-item">
-    <button type="button" tabindex="0" class="dropdown-item">
-        <div class="widget-content p-0">
-            <div class="widget-content-wrapper">
-                <div class="widget-content-left mr-3">
-                    <div class="avatar-icon-wrapper">
-                        <div class="badge badge-bottom badge-success badge-dot badge-dot-lg">
-                        </div>
-                        <div class="avatar-icon">
-                            <img src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
-                        </div>
+        <li class="nav-item-divider nav-item"></li>
+        <li class="nav-item">
+            <a href="javascript:void(0);" class="nav-link">
+                <i class="nav-link-icon pe-7s-box2"> </i>
+                <span>Corbeille</span>
+            </a>
+        </li>
+        <li class="nav-item-divider nav-item"></li>
+        <li class="nav-item-header nav-item">Amis en-ligne</li>
+        <li class="text-center p-2 nav-item">
+            <div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-primary badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/1.jpg')}}" alt="">
                     </div>
                 </div>
-                <div class="widget-content-left">
-                    <div class="widget-heading">Ella-Rose Henry</div>
-                    <div class="widget-subheading">Etiam sit amet orci eget eros faucibus</div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-focus badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/2.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-warning badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/3.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-danger badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/4.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-info badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/5.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-success badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/6.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-secondary badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/7.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="avatar-icon-wrapper">
+                    <div class="badge badge-warning badge-dot badge-dot-lg"></div>
+                    <div class="avatar-icon">
+                        <img src="{{asset('assets/images/avatars/8.jpg')}}" alt="">
+                    </div>
                 </div>
             </div>
-        </div>
-    </button>
-</li>
-   
-
-            </ul>
-           
-        </div>
+        </li>
+        <li class="nav-item-btn text-center nav-item">
+            <button class="btn-wide btn-pill btn btn-success btn-sm">Démarrer une conversation</button>
+        </li>
+    
+       
+    </ul>
+</div>
     </div>
 </div>
                     </div>
