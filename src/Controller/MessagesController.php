@@ -47,4 +47,17 @@ class MessagesController extends AbstractController
             'form'=> $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/messages/{id}", name="app_read_messages")
+     */
+    public function readMessage(Messages $message): Response
+    {
+        $message->setIsRead(true);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($message);
+        $em->flush();
+
+        return $this->render('messages/readMessage.html.twig', compact("message"));
+    }
 }
