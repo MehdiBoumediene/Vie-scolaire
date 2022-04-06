@@ -25,6 +25,13 @@
           <script type="text/javascript" src="{{asset('assets/scripts/main.js')}}"></script>
 
         {% endblock %}
+
+        
         </div>
+{% for message in app.flashes('message') %}
+<div id="toast-container" class="toast-top-right"><div class="toast toast-success" aria-live="polite" ><div class="toast-progress" style="width: 0.18%;"></div><button type="button" class="toast-close-button" role="button">×</button><div class="toast-message">{{message}}</div></div></div>
+
+
+{% endfor %}
     </body>
 </html>
