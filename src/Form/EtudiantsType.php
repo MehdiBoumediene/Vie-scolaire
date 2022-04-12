@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\Modules;
+use App\Entity\Classes;
 class EtudiantsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -21,16 +22,15 @@ class EtudiantsType extends AbstractType
             ->add('telephone')
             ->remove('created_at')
             ->remove('created_by')
-            ->add('modules', EntityType::class, [
-                'class' => Modules::class,
+            ->add('classes', EntityType::class, [
+                'class' => Classes::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple' => true,
-                'required' =>false
             ])
+     
             ->add('absences')
         ;
     }
