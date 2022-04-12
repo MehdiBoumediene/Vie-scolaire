@@ -61,6 +61,11 @@ class Modules
      */
     private $documents;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="modules")
+     */
+    private $classes;
+
    
 
     public function __construct()
@@ -234,6 +239,18 @@ class Modules
                 $document->setModule(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClasses(): ?Classes
+    {
+        return $this->classes;
+    }
+
+    public function setClasses(?Classes $classes): self
+    {
+        $this->classes = $classes;
 
         return $this;
     }

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\IntervenantsRepository;
 
 /**
  * @Route("/modules")
@@ -57,6 +58,7 @@ class ModulesController extends AbstractController
     {
         return $this->render('modules/show.html.twig', [
             'module' => $module,
+        
         ]);
     }
 

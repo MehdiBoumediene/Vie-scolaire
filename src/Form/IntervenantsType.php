@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\Modules;
+use App\Entity\Classes;
 class IntervenantsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -19,6 +20,14 @@ class IntervenantsType extends AbstractType
             ->add('adresse')
             ->add('telephone')
             ->add('email')
+            ->add('classes', EntityType::class, [
+                'class' => Classes::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+            ])
             ->remove('created_at')
             ->remove('created_by')
             ->add('modules', EntityType::class, [

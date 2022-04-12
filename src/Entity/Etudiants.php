@@ -66,6 +66,11 @@ class Etudiants
      */
     private $absences;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="etudiants")
+     */
+    private $classes;
+
 
     public function __construct()
     {
@@ -209,6 +214,18 @@ class Etudiants
         if ($this->absences->removeElement($absence)) {
             $absence->removeEtudiant($this);
         }
+
+        return $this;
+    }
+
+    public function getClasses(): ?Classes
+    {
+        return $this->classes;
+    }
+
+    public function setClasses(?Classes $classes): self
+    {
+        $this->classes = $classes;
 
         return $this;
     }
