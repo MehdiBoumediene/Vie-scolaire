@@ -47,27 +47,6 @@ class UsersType extends AbstractType
                 'label' => 'Rôles' 
             ])
 
-            ->add('classe', EntityType::class, [
-                'class' => Classes::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.nom', 'ASC');
-                },
-                'choice_label' => 'nom',
-                'multiple' => true,
-                'required' => false
-            ])
-
-            ->add('entreprise', EntityType::class, [
-                'class' => Entreprises::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.nom', 'ASC');
-                },
-                'choice_label' => 'nom',
-                'required' => false
-                
-            ])
             
         ;
     }
