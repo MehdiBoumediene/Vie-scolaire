@@ -25,7 +25,7 @@
                         
                             <div class="d-inline-block dropdown">
                             <a href="{{path('app_users_new')}}">
-                                <button  class="btn-shadow btn btn-info">
+                                <button  class="btn-shadow btn btn-success">
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
                                         <i class="fa fa-plus fa-w-20"></i>
                                     </span>
@@ -62,41 +62,40 @@
                             {% for user in users %}
                                 <tr role="row" class="odd">
                          
-                                    <td class="sorting_1 dtr-control">{{ user.email }}</td>
+                                    <td class="sorting_1 dtr-control"><a href="{{ path('app_users_show', {'id': user.id}) }}">{{ user.email }}</a></td>
                                     <td class="sorting_1 dtr-control">
                                       
                                         {% if user.roles[0] == "ROLE_USER" %}
-                                            Étudiant
+                                           <a href="{{ path('app_users_show', {'id': user.user.id}) }}"> Étudiant </a>
                                         {% elseif user.roles[0] == "ROLE_ADMIN" %}
-                                            Administrateur
+                                           <a href="{{ path('app_users_show', {'id': user.user.id}) }}"> Administrateur </a>
                                         {% elseif user.roles[0] == "ROLE_ETUDIANT" %}
-                                            Étudiant
+                                          <a href="{{ path('app_users_show', {'id': user.user.id}) }}">  Étudiant </a>
                                         {% elseif user.roles[0] == "ROLE_INTERVENANT" %}
-                                            Intervenant
+                                          <a href="{{ path('app_users_show', {'id': user.user.id}) }}">  Intervenant </a>
                                         {% elseif user.roles[0] == "ROLE_ENTREPRISE" %}
-                                            Entreprise    
+                                          <a href="{{ path('app_users_show', {'id': user.user.id}) }}">  Entreprise  </a>  
                                         {% elseif user.roles[0] == "ROLE_TUTEUR" %}
-                                            Tuteur   
+                                          <a href="{{ path('app_users_show', {'id': user.user.id}) }}">  Tuteur   </a>
                                         {% elseif user.roles[0] == "ROLE_AGENT" %}
-                                            Agent  
+                                          <a href="{{ path('app_users_show', {'id': user.user.id}) }}">  Agent  </a>
                                         {% endif %}
                                     
                                   
                                     
                                     </td>
 
-                                    <td class="sorting_1 dtr-control">{{ user.createdAt|date('d-m-Y H:i') }}</td>
-                                    <td class="sorting_1 dtr-control">{{ user.createdBy }}</td>
+                                    <td class="sorting_1 dtr-control"><a href="{{ path('app_users_show', {'id': user.id}) }}">{{ user.createdAt|date('d-m-Y H:i') }}</a></td>
+                                    <td class="sorting_1 dtr-control"><a href="{{ path('app_users_show', {'id': user.user.id}) }}">{{ user.user.email }}</a></td>
                                     
                                     <td class="sorting_1 dtr-control">
-                                    <a href="{{ path('app_users_show', {'id': user.id}) }}"><button class="mb-2 mr-2 btn-icon btn-icon btn-pill btn btn-link" style="color:#31a66a;" ><i class="lnr-eye btn-icon-wrapper"> </i>Voir</button></a>
                                         
                                         <a href="{{ path('app_users_edit', {'id': user.id}) }}"><button class="mb-2 mr-2 btn-icon btn-pill btn btn-link" ><i class="pe-7s-tools btn-icon-wrapper"> </i>Modifier</button></a>
                                     </td>
                                 </tr>
                             {% else %}
                                 <tr role="row" class="odd">
-                                    <td class="sorting_1 dtr-control" colspan="6">no records found</td>
+                                    <td class="sorting_1 dtr-control" colspan="6">Aucun résultat</td>
                                 </tr>
                             {% endfor %}
 

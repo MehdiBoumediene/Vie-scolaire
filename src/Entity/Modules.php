@@ -66,6 +66,11 @@ class Modules
      */
     private $classes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="modules")
+     */
+    private $user;
+
    
 
     public function __construct()
@@ -251,6 +256,18 @@ class Modules
     public function setClasses(?Classes $classes): self
     {
         $this->classes = $classes;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

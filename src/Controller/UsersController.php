@@ -50,7 +50,7 @@ class UsersController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $user->setCreatedBy($this->getUser()->getEmail());
-            
+            $user->setUser($this->getUser());
             $user->setCreatedAt($date);
             $user->setPassword($encoded);
             $usersRepository->add($user);

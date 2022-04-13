@@ -17,15 +17,15 @@
                                 <div class="page-title-icon">
                                     <i class="lnr-users icon-gradient bg-strong-bliss"></i>
                                 </div>
-                              <div>Créer une classe
+                              <div>Ajouter une classe
                                     <div class="page-title-subheading"> Créez votre nouvelle classe</div>
                                 </div>
                             </div>
                            <div class="page-title-actions">
                         
                             <div class="d-inline-block dropdown">
-                            <a href="{{path('app_users_index')}}">
-                                <button  class="btn-shadow btn btn-info">
+                            <a href="{{path('app_classes_index')}}">
+                                <button  class="mb-2 mr-2 btn btn-shadow btn-outline-2x btn-outline-secondary">
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
                                         <i class="fa fa-arrow-circle-left fa-w-20"></i>
                                     </span>
@@ -60,8 +60,8 @@
    
     </div> 
 
-
     </div>
+     {{ block("Footer", "Menus/Footer.html.twig") }}
 {% endblock %}
 
 

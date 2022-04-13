@@ -39,7 +39,7 @@ class ModulesController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $module->setCreatedBy($this->getUser()->getEmail());
-            
+            $module->setUser($this->getUser());
             $module->setCreatedAt($date);
             $modulesRepository->add($module);
             return $this->redirectToRoute('app_modules_index', [], Response::HTTP_SEE_OTHER);

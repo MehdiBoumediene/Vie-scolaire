@@ -39,7 +39,7 @@ class BlocsController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $bloc->setCreatedBy($this->getUser()->getEmail());
-            
+            $bloc->setUser($this->getUser());
             $bloc->setCreatedAt($date);
             $blocsRepository->add($bloc);
             return $this->redirectToRoute('app_blocs_index', [], Response::HTTP_SEE_OTHER);

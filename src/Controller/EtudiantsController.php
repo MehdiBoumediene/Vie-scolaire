@@ -38,7 +38,7 @@ class EtudiantsController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $etudiant->setCreatedBy($this->getUser()->getEmail());
-            
+            $etudiant->setUser($this->getUser());
             
             $etudiant->setCreatedAt($date);
             $etudiantsRepository->add($etudiant);

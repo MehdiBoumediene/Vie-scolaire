@@ -37,16 +37,7 @@ class ModulesType extends AbstractType
                 },
                 'choice_label' => 'nom',
             ])
-            ->add('intervenants', EntityType::class, [
-                'class' => Intervenants::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.nom', 'ASC');
-                },
-                'choice_label' => 'nom',
-                'multiple' => true,
-                'required' => false
-            ])
+  
       
          
         ;

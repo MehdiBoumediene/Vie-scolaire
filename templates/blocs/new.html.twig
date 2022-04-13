@@ -17,7 +17,7 @@
                                 <div class="page-title-icon">
                                     <i class="lnr-users icon-gradient bg-strong-bliss"></i>
                                 </div>
-                              <div>Créer un bloc
+                              <div>Ajouter un bloc
                                     <div class="page-title-subheading"> Créez votre nouveau bloc</div>
                                 </div>
                             </div>
@@ -25,7 +25,7 @@
                         
                             <div class="d-inline-block dropdown">
                             <a href="{{path('app_blocs_index')}}">
-                                <button  class="btn-shadow btn btn-info">
+                                <button  class="mb-2 mr-2 btn btn-shadow btn-outline-2x btn-outline-secondary">
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
                                         <i class="fa fa-arrow-circle-left fa-w-20"></i>
                                     </span>
@@ -62,6 +62,7 @@
 
 
     </div>
+     {{ block("Footer", "Menus/Footer.html.twig") }}
 {% endblock %}
 
 
