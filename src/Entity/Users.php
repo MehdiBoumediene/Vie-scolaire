@@ -76,11 +76,76 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $received;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="user")
+     */
+    private $classes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Blocs::class, mappedBy="user")
+     */
+    private $blocs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Modules::class, mappedBy="user")
+     */
+    private $modules;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Intervenants::class, mappedBy="user")
+     */
+    private $intervenants;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Etudiants::class, mappedBy="user")
+     */
+    private $etudiants;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Entreprises::class, mappedBy="user")
+     */
+    private $entreprises;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Tuteurs::class, mappedBy="user")
+     */
+    private $tuteurs;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="users")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="user")
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Absences::class, mappedBy="user")
+     */
+    private $absences;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Documents::class, mappedBy="user")
+     */
+    private $documents;
+
     public function __construct()
     {
         $this->classe = new ArrayCollection();
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
+        $this->classes = new ArrayCollection();
+        $this->blocs = new ArrayCollection();
+        $this->modules = new ArrayCollection();
+        $this->intervenants = new ArrayCollection();
+        $this->etudiants = new ArrayCollection();
+        $this->entreprises = new ArrayCollection();
+        $this->tuteurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->absences = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
 
@@ -299,6 +364,318 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($received->getRecipient() === $this) {
                 $received->setRecipient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Classes>
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classes $class): self
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes[] = $class;
+            $class->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classes $class): self
+    {
+        if ($this->classes->removeElement($class)) {
+            // set the owning side to null (unless already changed)
+            if ($class->getUser() === $this) {
+                $class->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Blocs>
+     */
+    public function getBlocs(): Collection
+    {
+        return $this->blocs;
+    }
+
+    public function addBloc(Blocs $bloc): self
+    {
+        if (!$this->blocs->contains($bloc)) {
+            $this->blocs[] = $bloc;
+            $bloc->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBloc(Blocs $bloc): self
+    {
+        if ($this->blocs->removeElement($bloc)) {
+            // set the owning side to null (unless already changed)
+            if ($bloc->getUser() === $this) {
+                $bloc->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Modules>
+     */
+    public function getModules(): Collection
+    {
+        return $this->modules;
+    }
+
+    public function addModule(Modules $module): self
+    {
+        if (!$this->modules->contains($module)) {
+            $this->modules[] = $module;
+            $module->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Modules $module): self
+    {
+        if ($this->modules->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getUser() === $this) {
+                $module->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Intervenants>
+     */
+    public function getIntervenants(): Collection
+    {
+        return $this->intervenants;
+    }
+
+    public function addIntervenant(Intervenants $intervenant): self
+    {
+        if (!$this->intervenants->contains($intervenant)) {
+            $this->intervenants[] = $intervenant;
+            $intervenant->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIntervenant(Intervenants $intervenant): self
+    {
+        if ($this->intervenants->removeElement($intervenant)) {
+            // set the owning side to null (unless already changed)
+            if ($intervenant->getUser() === $this) {
+                $intervenant->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etudiants>
+     */
+    public function getEtudiants(): Collection
+    {
+        return $this->etudiants;
+    }
+
+    public function addEtudiant(Etudiants $etudiant): self
+    {
+        if (!$this->etudiants->contains($etudiant)) {
+            $this->etudiants[] = $etudiant;
+            $etudiant->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtudiant(Etudiants $etudiant): self
+    {
+        if ($this->etudiants->removeElement($etudiant)) {
+            // set the owning side to null (unless already changed)
+            if ($etudiant->getUser() === $this) {
+                $etudiant->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Entreprises>
+     */
+    public function getEntreprises(): Collection
+    {
+        return $this->entreprises;
+    }
+
+    public function addEntreprise(Entreprises $entreprise): self
+    {
+        if (!$this->entreprises->contains($entreprise)) {
+            $this->entreprises[] = $entreprise;
+            $entreprise->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntreprise(Entreprises $entreprise): self
+    {
+        if ($this->entreprises->removeElement($entreprise)) {
+            // set the owning side to null (unless already changed)
+            if ($entreprise->getUser() === $this) {
+                $entreprise->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tuteurs>
+     */
+    public function getTuteurs(): Collection
+    {
+        return $this->tuteurs;
+    }
+
+    public function addTuteur(Tuteurs $tuteur): self
+    {
+        if (!$this->tuteurs->contains($tuteur)) {
+            $this->tuteurs[] = $tuteur;
+            $tuteur->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTuteur(Tuteurs $tuteur): self
+    {
+        if ($this->tuteurs->removeElement($tuteur)) {
+            // set the owning side to null (unless already changed)
+            if ($tuteur->getUser() === $this) {
+                $tuteur->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?self
+    {
+        return $this->user;
+    }
+
+    public function setUser(?self $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(self $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(self $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getUser() === $this) {
+                $user->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Absences>
+     */
+    public function getAbsences(): Collection
+    {
+        return $this->absences;
+    }
+
+    public function addAbsence(Absences $absence): self
+    {
+        if (!$this->absences->contains($absence)) {
+            $this->absences[] = $absence;
+            $absence->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbsence(Absences $absence): self
+    {
+        if ($this->absences->removeElement($absence)) {
+            // set the owning side to null (unless already changed)
+            if ($absence->getUser() === $this) {
+                $absence->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Documents>
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function addDocument(Documents $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+            $document->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Documents $document): self
+    {
+        if ($this->documents->removeElement($document)) {
+            // set the owning side to null (unless already changed)
+            if ($document->getUser() === $this) {
+                $document->setUser(null);
             }
         }
 

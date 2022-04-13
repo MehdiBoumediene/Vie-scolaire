@@ -35,6 +35,8 @@
                                     </span>
                                     Retour à la liste
                                 </button>
+                                </a>
+                                 <a href="{{ path('app_classes_edit',{id:class.id}) }}">
                                 <button  class="mb-2 mr-2 btn-outline-2x btn btn-shadow-warning btn-outline-warning">
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
                                         <i class="fa fa-fw" aria-hidden="true" title="Copy to use edit"></i>
@@ -44,7 +46,7 @@
                                 
                                 {{ include('classes/_delete_form.html.twig') }}
 
-                               </a>
+                             
                             </div>
                         </div>
                         </div>
@@ -59,7 +61,7 @@
                             <ul class="list-group list-group-flush">
                                 {% for module in modules %}
                                  
-                                  <a href="javascript:void(0);" class="list-group-item">{{module.nom}}</a>
+                                  <a href="{{path('app_modules_show',{id:module.id})}}" class="list-group-item">{{module.nom}}</a>
 
                                 {% endfor %}
                      
@@ -74,7 +76,7 @@
                             <ul class="list-group list-group-flush">
                                    {% for intervenant in intervenants %}
                                  
-                                  <a href="javascript:void(0);" class="list-group-item">{{intervenant.nom}}</a>
+                                  <a href="{{path('app_intervenants_show',{id:intervenant.id})}}" class="list-group-item">{{intervenant.nom}}</a>
 
                                 {% endfor %}
                             </ul>
@@ -89,7 +91,7 @@
                             <ul class="list-group list-group-flush">
                                  {% for etudiant in etudiants %}
                                  
-                                  <a href="javascript:void(0);" class="list-group-item">{{etudiant.nom}}</a>
+                                  <a href="{{path('app_etudiants_show',{id:etudiant.id})}}" class="list-group-item">{{etudiant.nom}}</a>
 
                                 {% endfor %}
                             </ul>
@@ -98,7 +100,7 @@
                 </div>
             </div>
             </div>
-
+</div>
     
 
   

@@ -71,6 +71,11 @@ class Entreprises
      */
     private $users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="entreprises")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->tuteurs = new ArrayCollection();
@@ -234,6 +239,18 @@ class Entreprises
                 $user->setEntreprise(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

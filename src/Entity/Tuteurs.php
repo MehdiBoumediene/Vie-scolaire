@@ -59,6 +59,11 @@ class Tuteurs
      */
     private $entreprise;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="tuteurs")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -156,6 +161,18 @@ class Tuteurs
     public function setEntreprise(?Entreprises $entreprise): self
     {
         $this->entreprise = $entreprise;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

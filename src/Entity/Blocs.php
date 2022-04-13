@@ -46,6 +46,11 @@ class Blocs
      */
     private $modules;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="blocs")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->modules = new ArrayCollection();
@@ -130,6 +135,18 @@ class Blocs
                 $module->setBloc(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

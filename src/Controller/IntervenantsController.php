@@ -39,7 +39,7 @@ class IntervenantsController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $intervenant->setCreatedBy($this->getUser()->getEmail());
-            
+            $intervenant->setUser($this->getUser());
             $intervenant->setCreatedAt($date);
             $intervenantsRepository->add($intervenant);
             return $this->redirectToRoute('app_intervenants_index', [], Response::HTTP_SEE_OTHER);
