@@ -59,7 +59,7 @@
                             <ul class="list-group list-group-flush">
                                 {% for intervenant in module.intervenants %}
                                  
-                                  <a href="javascript:void(0);" class="list-group-item">{{intervenant.nom}}</a>
+                                  <a href="{{path('app_intervenants_show',{id:intervenant.id})}}" class="list-group-item">{{intervenant.prenom}} {{intervenant.nom}}</a>
 
                                 {% endfor %}
                      
