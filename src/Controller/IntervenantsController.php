@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Intervenants;
 use App\Form\IntervenantsType;
 use App\Repository\IntervenantsRepository;
+use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,11 @@ class IntervenantsController extends AbstractController
     /**
      * @Route("/", name="app_intervenants_index", methods={"GET"})
      */
-    public function index(IntervenantsRepository $intervenantsRepository): Response
+    public function index(UsersRepository $usersRepository): Response
     {
+     
         return $this->render('intervenants/index.html.twig', [
-            'intervenants' => $intervenantsRepository->findAll(),
+            'intervenants' => $usersRepository->findByIntervenant(),
         ]);
     }
 

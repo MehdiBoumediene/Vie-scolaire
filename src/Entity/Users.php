@@ -86,10 +86,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $blocs;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Modules::class, mappedBy="user")
-     */
-    private $modules;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Intervenants::class, mappedBy="user")
@@ -131,6 +128,28 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $documents;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adresse;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephone;
+
+
+
     public function __construct()
     {
         $this->classe = new ArrayCollection();
@@ -138,7 +157,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->received = new ArrayCollection();
         $this->classes = new ArrayCollection();
         $this->blocs = new ArrayCollection();
-        $this->modules = new ArrayCollection();
         $this->intervenants = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
         $this->entreprises = new ArrayCollection();
@@ -146,6 +164,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->users = new ArrayCollection();
         $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
+      
     }
 
 
@@ -430,35 +449,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Modules>
-     */
-    public function getModules(): Collection
-    {
-        return $this->modules;
-    }
-
-    public function addModule(Modules $module): self
-    {
-        if (!$this->modules->contains($module)) {
-            $this->modules[] = $module;
-            $module->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeModule(Modules $module): self
-    {
-        if ($this->modules->removeElement($module)) {
-            // set the owning side to null (unless already changed)
-            if ($module->getUser() === $this) {
-                $module->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Intervenants>
@@ -681,4 +672,54 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+   
 }
