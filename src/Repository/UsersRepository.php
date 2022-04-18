@@ -65,20 +65,40 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     // /**
     //  * @return Users[] Returns an array of Users objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByIntervenant()
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
+            ->where('u.roles LIKE :role')
+            ->setParameter('role', '%"'.'ROLE_INTERVENANT'.'"%')
             ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+  
 
+    public function findByEtudiant()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :role')
+            ->setParameter('role', '%"'.'ROLE_ETUDIANT'.'"%')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByTuteur()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :role')
+            ->setParameter('role', '%"'.'ROLE_TUTEUR'.'"%')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     /*
     public function findOneBySomeField($value): ?Users
     {

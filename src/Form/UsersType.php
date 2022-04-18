@@ -17,6 +17,8 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Classes;
 use App\Entity\Entreprises;
+use App\Entity\Modules;
+
 
 class UsersType extends AbstractType
 {
@@ -25,7 +27,9 @@ class UsersType extends AbstractType
         $builder
             ->add('email')
             ->add('roles')
-            ->add('password', PasswordType::class)
+            ->add('password', PasswordType::class,[
+                
+            ])
             ->add('isVerified',CheckboxType::class,[
                 'label' => 'Compte Activé', 
                 'data' => true,
@@ -47,7 +51,30 @@ class UsersType extends AbstractType
                 'label' => 'Rôles' 
             ])
 
-            
+            ->add('nom')
+            ->add('prenom')
+            ->add('adresse')
+            ->add('telephone')
+            ->add('classes', EntityType::class, [
+                'class' => Classes::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+                'multiple' => true,
+                
+            ])
+            ->add('module', EntityType::class, [
+                'class' => Modules::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'required' => false
+            ])
         ;
     }
 

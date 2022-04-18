@@ -67,10 +67,11 @@ class Modules
     private $classes;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="modules")
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="module")
      */
-    private $user;
+    private $users;
 
+   
    
 
     public function __construct()
@@ -79,6 +80,7 @@ class Modules
         $this->etudiants = new ArrayCollection();
         $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -260,16 +262,18 @@ class Modules
         return $this;
     }
 
-    public function getUser(): ?Users
+    public function getUsers(): ?Users
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(?Users $user): self
+    public function setUsers(?Users $users): self
     {
-        $this->user = $user;
+        $this->users = $users;
 
         return $this;
     }
+
+  
 
 }
