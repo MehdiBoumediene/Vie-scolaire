@@ -51,6 +51,21 @@ class Absences
      */
     private $created_by;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $du;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $au;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="absences")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->etudiant = new ArrayCollection();
@@ -154,6 +169,42 @@ class Absences
     public function setCreatedBy(?string $created_by): self
     {
         $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    public function getDu(): ?\DateTimeInterface
+    {
+        return $this->du;
+    }
+
+    public function setDu(?\DateTimeInterface $du): self
+    {
+        $this->du = $du;
+
+        return $this;
+    }
+
+    public function getAu(): ?\DateTimeInterface
+    {
+        return $this->au;
+    }
+
+    public function setAu(?\DateTimeInterface $au): self
+    {
+        $this->au = $au;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

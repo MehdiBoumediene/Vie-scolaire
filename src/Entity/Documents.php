@@ -54,6 +54,11 @@ class Documents
      */
     private $created_by;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="documents")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,6 +144,18 @@ class Documents
     public function setCreatedBy(?string $created_by): self
     {
         $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

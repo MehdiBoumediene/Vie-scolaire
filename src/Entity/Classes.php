@@ -41,9 +41,38 @@ class Classes
      */
     private $blocs;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="classe")
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Etudiants::class, mappedBy="classes")
+     */
+    private $etudiants;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Intervenants::class, mappedBy="classes")
+     */
+    private $intervenants;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Modules::class, mappedBy="classes")
+     */
+    private $modules;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="classes")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->blocs = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->etudiants = new ArrayCollection();
+        $this->intervenants = new ArrayCollection();
+        $this->modules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +142,135 @@ class Classes
                 $bloc->setClasse(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Users>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeClasse($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etudiants>
+     */
+    public function getEtudiants(): Collection
+    {
+        return $this->etudiants;
+    }
+
+    public function addEtudiant(Etudiants $etudiant): self
+    {
+        if (!$this->etudiants->contains($etudiant)) {
+            $this->etudiants[] = $etudiant;
+            $etudiant->setClasses($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtudiant(Etudiants $etudiant): self
+    {
+        if ($this->etudiants->removeElement($etudiant)) {
+            // set the owning side to null (unless already changed)
+            if ($etudiant->getClasses() === $this) {
+                $etudiant->setClasses(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Intervenants>
+     */
+    public function getIntervenants(): Collection
+    {
+        return $this->intervenants;
+    }
+
+    public function addIntervenant(Intervenants $intervenant): self
+    {
+        if (!$this->intervenants->contains($intervenant)) {
+            $this->intervenants[] = $intervenant;
+            $intervenant->setClasses($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIntervenant(Intervenants $intervenant): self
+    {
+        if ($this->intervenants->removeElement($intervenant)) {
+            // set the owning side to null (unless already changed)
+            if ($intervenant->getClasses() === $this) {
+                $intervenant->setClasses(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Modules>
+     */
+    public function getModules(): Collection
+    {
+        return $this->modules;
+    }
+
+    public function addModule(Modules $module): self
+    {
+        if (!$this->modules->contains($module)) {
+            $this->modules[] = $module;
+            $module->setClasses($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Modules $module): self
+    {
+        if ($this->modules->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getClasses() === $this) {
+                $module->setClasses(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

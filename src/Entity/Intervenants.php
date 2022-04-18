@@ -71,6 +71,16 @@ class Intervenants
      */
     private $documents;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="intervenants")
+     */
+    private $classes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="intervenants")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->modules = new ArrayCollection();
@@ -244,6 +254,30 @@ class Intervenants
                 $document->setIntervenant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClasses(): ?Classes
+    {
+        return $this->classes;
+    }
+
+    public function setClasses(?Classes $classes): self
+    {
+        $this->classes = $classes;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
