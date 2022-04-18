@@ -148,6 +148,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $telephone;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Modules::class, mappedBy="users")
+     */
+    private $module;
+
 
 
     public function __construct()
@@ -164,6 +169,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->users = new ArrayCollection();
         $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        $this->module = new ArrayCollection();
       
     }
 
@@ -717,6 +723,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Modules>
+     */
+    public function getModule(): Collection
+    {
+        return $this->module;
+    }
+
+    public function addModule(Modules $module): self
+    {
+        if (!$this->module->contains($module)) {
+            $this->module[] = $module;
+            $module->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Modules $module): self
+    {
+        if ($this->module->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getUsers() === $this) {
+                $module->setUsers(null);
+            }
+        }
 
         return $this;
     }
