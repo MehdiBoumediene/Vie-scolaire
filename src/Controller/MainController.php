@@ -17,4 +17,15 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
+
+        /**
+     * @Route("/gestion/calendrier", name="app_gestion_calendrier")
+     */
+    public function calendrier(): Response
+    {
+        return $this->render('main/gestion_calendrier.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
 }
