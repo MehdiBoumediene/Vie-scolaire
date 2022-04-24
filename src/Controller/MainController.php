@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CalendrierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,10 +23,29 @@ class MainController extends AbstractController
         /**
      * @Route("/gestion/calendrier", name="app_gestion_calendrier")
      */
-    public function calendrier(): Response
+    public function calendrier(CalendrierRepository $calendrier): Response
     {
-        return $this->render('main/gestion_calendrier.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $events = $calendrier->findAll();
+        $rdvs = [];
+        foreach ($events as $event){
+
+            $rdvs[] = [
+                'id' => $event->getId(),
+                'start' => $event->getStart()->format('Y-m-d H:i'),
+                'end' => $event->getEnd()->format('Y-m-d H:i'),
+                'backgroundColor' => $event->getBackgroundColor(),
+                'borderColor' => $event->getBackgroundColor(),
+                'textColor' => $event->getTextColor(),
+                'title' => $event->getTitre(),
+                'description' => $event->getDescription(),
+                'textColor' => $event->getTextColor(),
+                'allDay' => $event->getAllDay(),
+                'type' => $event->getType(),
+
+
+            ];
+            $data = json_encode($rdvs);
+        }
+        return $this->render('main/gestion_calendrier.html.twig',compact('data'));
     }
 }
