@@ -26,3 +26,7 @@ label[for="users_isVerified"] {
   width: 360px;
   flex: 0 0 275px;
 }
+a {
+  color: #434344 !important;
+
+}

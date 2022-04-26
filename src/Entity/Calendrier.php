@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CalendrierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,9 +62,19 @@ class Calendrier
     private $text_color;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="calendrier")
+     */
+    private $classe;
+
+    public function __construct()
+    {
+        $this->classe = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,6 +185,36 @@ class Calendrier
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Classes>
+     */
+    public function getClasse(): Collection
+    {
+        return $this->classe;
+    }
+
+    public function addClasse(Classes $classe): self
+    {
+        if (!$this->classe->contains($classe)) {
+            $this->classe[] = $classe;
+            $classe->setCalendrier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClasse(Classes $classe): self
+    {
+        if ($this->classe->removeElement($classe)) {
+            // set the owning side to null (unless already changed)
+            if ($classe->getCalendrier() === $this) {
+                $classe->setCalendrier(null);
+            }
+        }
 
         return $this;
     }
