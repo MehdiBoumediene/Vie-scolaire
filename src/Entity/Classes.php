@@ -66,6 +66,11 @@ class Classes
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Calendrier::class, inversedBy="classe")
+     */
+    private $calendrier;
+
     public function __construct()
     {
         $this->blocs = new ArrayCollection();
@@ -271,6 +276,18 @@ class Classes
     public function setUser(?Users $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCalendrier(): ?Calendrier
+    {
+        return $this->calendrier;
+    }
+
+    public function setCalendrier(?Calendrier $calendrier): self
+    {
+        $this->calendrier = $calendrier;
 
         return $this;
     }

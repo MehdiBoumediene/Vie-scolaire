@@ -20,7 +20,7 @@ class MainController extends AbstractController
     }
 
 
-        /**
+    /**
      * @Route("/gestion/calendrier", name="app_gestion_calendrier")
      */
     public function calendrier(CalendrierRepository $calendrier): Response
@@ -44,8 +44,69 @@ class MainController extends AbstractController
 
 
             ];
+
             $data = json_encode($rdvs);
         }
         return $this->render('main/gestion_calendrier.html.twig',compact('data'));
+    }
+
+    /**
+     * @Route("/calendrier_etudiant", name="app_calendrier_etudiant")
+     */
+    public function calendrierEtudiant(CalendrierRepository $calendrier): Response
+    {
+        $events = $calendrier->findAll();
+        $rdvs = [];
+        foreach ($events as $event){
+
+            $rdvs[] = [
+                'id' => $event->getId(),
+                'start' => $event->getStart()->format('Y-m-d H:i'),
+                'end' => $event->getEnd()->format('Y-m-d H:i'),
+                'backgroundColor' => $event->getBackgroundColor(),
+                'borderColor' => $event->getBackgroundColor(),
+                'textColor' => $event->getTextColor(),
+                'title' => $event->getTitre(),
+                'description' => $event->getDescription(),
+                'textColor' => $event->getTextColor(),
+                'allDay' => $event->getAllDay(),
+                'type' => $event->getType(),
+
+
+            ];
+
+            $data = json_encode($rdvs);
+        }
+        return $this->render('main/calendrier_etudiant.html.twig',compact('data'));
+    }
+
+     /**
+     * @Route("/calendrier_intervenant", name="app_calendrier_intervenant")
+     */
+    public function calendrierIntervenant(CalendrierRepository $calendrier): Response
+    {
+        $events = $calendrier->findAll();
+        $rdvs = [];
+        foreach ($events as $event){
+
+            $rdvs[] = [
+                'id' => $event->getId(),
+                'start' => $event->getStart()->format('Y-m-d H:i'),
+                'end' => $event->getEnd()->format('Y-m-d H:i'),
+                'backgroundColor' => $event->getBackgroundColor(),
+                'borderColor' => $event->getBackgroundColor(),
+                'textColor' => $event->getTextColor(),
+                'title' => $event->getTitre(),
+                'description' => $event->getDescription(),
+                'textColor' => $event->getTextColor(),
+                'allDay' => $event->getAllDay(),
+                'type' => $event->getType(),
+
+
+            ];
+
+            $data = json_encode($rdvs);
+        }
+        return $this->render('main/calendrier_intervenant.html.twig',compact('data'));
     }
 }

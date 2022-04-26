@@ -6,6 +6,9 @@ use App\Entity\Calendrier;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
+use App\Entity\Classes;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,17 +19,43 @@ class CalendrierType extends AbstractType
         $builder
             ->add('titre')
             ->add('start',DateTimeType::class,[
-                'date_widget' => 'single_text'
+                'label' => 'Date début',
+                'widget' => "single_text"
             ])
             ->add('end',DateTimeType::class,[
-                'date_widget' => 'single_text'
+                'label' => 'Date fin',
+                'widget' => "single_text"
+                
             ])
             ->add('description')
-            ->add('all_day')
-            ->add('background_color', ColorType::class)
-            ->add('border_color', ColorType::class)
-            ->add('text_color', ColorType::class)
-            ->add('type')
+            ->remove('all_day')
+            ->add('background_color', ColorType::class,[
+                'label' => 'Couleur du fond ',
+                
+                
+            ])
+            ->add('border_color', ColorType::class,[
+                'label' => 'Couleur bordure ',
+                
+                
+            ])
+            ->add('text_color', ColorType::class,[
+                'label' => 'Couleur du texte ',
+                
+                
+            ])
+
+            ->add('classe', EntityType::class, [
+                'class' => Classes::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+                'multiple'=>true
+            ])
+
+            ->remove('type')
         ;
     }
 
