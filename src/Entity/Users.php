@@ -61,10 +61,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $classe;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Entreprises::class, inversedBy="users")
-     */
-    private $entreprise;
+  
 
     /**
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="sender", orphanRemoval=true)
@@ -98,15 +95,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $etudiants;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Entreprises::class, mappedBy="user")
-     */
-    private $entreprises;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Tuteurs::class, mappedBy="user")
-     */
-    private $tuteurs;
 
     /**
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="users")
@@ -153,6 +141,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $module;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Tuteurs::class, inversedBy="users")
+     */
+    private $tuteurs;
+
 
 
     public function __construct()
@@ -164,8 +157,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->blocs = new ArrayCollection();
         $this->intervenants = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
-        $this->entreprises = new ArrayCollection();
-        $this->tuteurs = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
@@ -323,17 +314,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEntreprise(): ?Entreprises
-    {
-        return $this->entreprise;
-    }
-
-    public function setEntreprise(?Entreprises $entreprise): self
-    {
-        $this->entreprise = $entreprise;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Messages>
@@ -517,66 +498,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Entreprises>
-     */
-    public function getEntreprises(): Collection
-    {
-        return $this->entreprises;
-    }
-
-    public function addEntreprise(Entreprises $entreprise): self
-    {
-        if (!$this->entreprises->contains($entreprise)) {
-            $this->entreprises[] = $entreprise;
-            $entreprise->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEntreprise(Entreprises $entreprise): self
-    {
-        if ($this->entreprises->removeElement($entreprise)) {
-            // set the owning side to null (unless already changed)
-            if ($entreprise->getUser() === $this) {
-                $entreprise->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Tuteurs>
-     */
-    public function getTuteurs(): Collection
-    {
-        return $this->tuteurs;
-    }
-
-    public function addTuteur(Tuteurs $tuteur): self
-    {
-        if (!$this->tuteurs->contains($tuteur)) {
-            $this->tuteurs[] = $tuteur;
-            $tuteur->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTuteur(Tuteurs $tuteur): self
-    {
-        if ($this->tuteurs->removeElement($tuteur)) {
-            // set the owning side to null (unless already changed)
-            if ($tuteur->getUser() === $this) {
-                $tuteur->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getUser(): ?self
     {
         return $this->user;
@@ -753,6 +674,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $module->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTuteurs(): ?Tuteurs
+    {
+        return $this->tuteurs;
+    }
+
+    public function setTuteurs(?Tuteurs $tuteurs): self
+    {
+        $this->tuteurs = $tuteurs;
 
         return $this;
     }

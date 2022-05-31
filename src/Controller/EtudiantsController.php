@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Etudiants;
+use App\Entity\Tuteurs;
 use App\Form\EtudiantsType;
 use App\Repository\EtudiantsRepository;
 use App\Repository\UsersRepository;
@@ -21,8 +22,11 @@ class EtudiantsController extends AbstractController
      */
     public function index(UsersRepository $usersRepository): Response
     {
-        return $this->render('etudiants/index.html.twig', [
+        
+            $tuteurs= new Tuteurs();
+            return $this->render('etudiants/index.html.twig', [
             'etudiants' => $usersRepository->findByEtudiant(),
+             'tuteurs' => $usersRepository->findByTuteur(),
         ]);
     }
 

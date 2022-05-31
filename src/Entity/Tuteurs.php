@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TuteursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,6 +65,24 @@ class Tuteurs
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="tuteurs")
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Etudiants::class, mappedBy="tuteurs")
+     */
+    private $etudiants;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="tuteurs")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->etudiants = new ArrayCollection();
+        $this->users = new ArrayCollection();
+    }
+
+  
 
     public function getId(): ?int
     {
@@ -173,6 +193,66 @@ class Tuteurs
     public function setUser(?Users $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etudiants>
+     */
+    public function getEtudiants(): Collection
+    {
+        return $this->etudiants;
+    }
+
+    public function addEtudiant(Etudiants $etudiant): self
+    {
+        if (!$this->etudiants->contains($etudiant)) {
+            $this->etudiants[] = $etudiant;
+            $etudiant->setTuteurs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtudiant(Etudiants $etudiant): self
+    {
+        if ($this->etudiants->removeElement($etudiant)) {
+            // set the owning side to null (unless already changed)
+            if ($etudiant->getTuteurs() === $this) {
+                $etudiant->setTuteurs(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Users>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setTuteurs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getTuteurs() === $this) {
+                $user->setTuteurs(null);
+            }
+        }
 
         return $this;
     }

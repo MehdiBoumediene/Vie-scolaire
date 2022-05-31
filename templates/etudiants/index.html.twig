@@ -55,6 +55,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Nom</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Téléphone</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Email</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Tuteur</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Date de création</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Créé par</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 110.2px;" aria-label="Start date: activate to sort column ascending">Actions</th>
@@ -79,6 +80,16 @@
 
                                     <td class="sorting_1 dtr-control">
                                  <a href="{{ path('app_users_show', {'id': etudiant.id}) }}">   {{ etudiant.email }} </a>
+                                    </td>
+
+                                    <td class="sorting_1 dtr-control">
+                                     {% for tuteurs in etudiant.tuteurs %}
+                                            {% if tuteurs.nom %}
+                                         <a href="{{ path('app_tuteurs_show', {'id': tuteurs.id}) }}"> {{tuteurs.nom}}</a>
+                                            {% endif %}
+                                            {% else %}
+                                                   <a> Sans Tuteur </a>              
+                                     {% endfor %}
                                     </td>
 
                                     <td class="sorting_1 dtr-control">
