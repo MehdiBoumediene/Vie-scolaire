@@ -23,7 +23,7 @@ class EtudiantsController extends AbstractController
     public function index(UsersRepository $usersRepository): Response
     {
         
-            $tuteurs= new Tuteurs();
+          
             return $this->render('etudiants/index.html.twig', [
             'etudiants' => $usersRepository->findByEtudiant(),
              'tuteurs' => $usersRepository->findByTuteur(),

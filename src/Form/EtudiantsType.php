@@ -33,7 +33,6 @@ class EtudiantsType extends AbstractType
                 },
                 'choice_label' => 'nom',
             ])
-     
             ->add('absences')
         ;
     }

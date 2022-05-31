@@ -71,6 +71,11 @@ class Classes
      */
     private $calendrier;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="class")
+     */
+    private $class_id;
+
     public function __construct()
     {
         $this->blocs = new ArrayCollection();
@@ -78,6 +83,7 @@ class Classes
         $this->etudiants = new ArrayCollection();
         $this->intervenants = new ArrayCollection();
         $this->modules = new ArrayCollection();
+        $this->class_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -288,6 +294,36 @@ class Classes
     public function setCalendrier(?Calendrier $calendrier): self
     {
         $this->calendrier = $calendrier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Users>
+     */
+    public function getClassId(): Collection
+    {
+        return $this->class_id;
+    }
+
+    public function addClassId(Users $classId): self
+    {
+        if (!$this->class_id->contains($classId)) {
+            $this->class_id[] = $classId;
+            $classId->setClass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassId(Users $classId): self
+    {
+        if ($this->class_id->removeElement($classId)) {
+            // set the owning side to null (unless already changed)
+            if ($classId->getClass() === $this) {
+                $classId->setClass(null);
+            }
+        }
 
         return $this;
     }
