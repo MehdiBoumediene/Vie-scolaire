@@ -25,7 +25,6 @@ class ModulesController extends AbstractController
             'modules' => $modulesRepository->findAll(),
         ]);
     }
-
     /**
      * @Route("/new", name="app_modules_new", methods={"GET", "POST"})
      */
@@ -39,7 +38,7 @@ class ModulesController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $module->setCreatedBy($this->getUser()->getEmail());
-            $module->setUser($this->getUser());
+            $module->setUsers($this->getUser());
             $module->setCreatedAt($date);
             $modulesRepository->add($module);
             return $this->redirectToRoute('app_modules_index', [], Response::HTTP_SEE_OTHER);

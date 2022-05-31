@@ -10,17 +10,21 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\Modules;
 use App\Entity\Classes;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 class IntervenantsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('adresse')
-            ->add('telephone')
-            ->add('email')
-            ->add('classes', EntityType::class, [
+            ->add('nom',TextType::class)
+            ->add('prenom',TextType::class)
+            ->add('adresse',TextType::class)
+            ->add('telephone',TelType::class)
+            ->add('email',EmailType::class)
+            ->add('classes',EntityType::class, [
                 'class' => Classes::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')

@@ -76,11 +76,17 @@ class Etudiants
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Tuteurs::class, inversedBy="etudiants")
+     */
+    private $tuteurs;
+
 
     public function __construct()
     {
         $this->modules = new ArrayCollection();
         $this->absences = new ArrayCollection();
+        $this->tuteurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,6 +249,18 @@ class Etudiants
     public function setUser(?Users $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTuteurs(): ?Tuteurs
+    {
+        return $this->tuteurs;
+    }
+
+    public function setTuteurs(?Tuteurs $tuteurs): self
+    {
+        $this->tuteurs = $tuteurs;
 
         return $this;
     }

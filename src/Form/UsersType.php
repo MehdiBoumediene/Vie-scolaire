@@ -16,8 +16,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Classes;
-use App\Entity\Entreprises;
 use App\Entity\Modules;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 
 class UsersType extends AbstractType
@@ -25,10 +27,8 @@ class UsersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('roles')
-            ->add('password', PasswordType::class,[
-                
+            ->add('email',EmailType::class)
+            ->add('password', PasswordType::class,[  
             ])
             ->add('isVerified',CheckboxType::class,[
                 'label' => 'Compte Activé', 
@@ -39,10 +39,8 @@ class UsersType extends AbstractType
                 'choices' => [
                     'Étudiant' => 'ROLE_ETUDIANT',
                     'Intervenant' => 'ROLE_INTERVENANT',
-                    'Entreprise' => 'ROLE_ENTREPRISE',
                     'Tuteur' => 'ROLE_TUTEUR',
                     'Administrateur' => 'ROLE_ADMIN',
-                    'Agent' => 'ROLE_AGENT',
                     
                 ],
                 'expanded' => false,
@@ -51,10 +49,10 @@ class UsersType extends AbstractType
                 'label' => 'Rôles' 
             ])
 
-            ->add('nom')
-            ->add('prenom')
-            ->add('adresse')
-            ->add('telephone')
+            ->add('nom',TextType::class)
+            ->add('prenom', TextType::class)
+            ->add('adresse',TextType::class)
+            ->add('telephone',TelType::class)
             ->add('classes', EntityType::class, [
                 'class' => Classes::class,
                 'query_builder' => function (EntityRepository $er) {
