@@ -29,3 +29,8 @@ label[for="users_isVerified"] {
 a {
   color: #434344 !important;
 }
+
+.pe-7s-info:before
+{
+  display : none;
+}
