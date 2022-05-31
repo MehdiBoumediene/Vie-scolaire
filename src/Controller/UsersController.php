@@ -54,7 +54,18 @@ class UsersController extends AbstractController
             $user->setCreatedAt($date);
             $user->setPassword($encoded);
             $usersRepository->add($user);
-            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+
+
+         /*   if( $user->getRoles() == ["ROLE_INTERVENANT"])
+           { 
+                return $this->redirectToRoute('app_intervenants_index', [], Response::HTTP_SEE_OTHER); 
+            }
+            else if ( $user->getRoles() == ["ROLE_ETUDIANT"])
+            {
+
+                return $this->redirectToRoute('app_etudiants_index', [], Response::HTTP_SEE_OTHER); 
+            }*/
+            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER); 
         }
 
         return $this->renderForm('users/new.html.twig', [
