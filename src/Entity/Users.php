@@ -146,6 +146,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $tuteurs;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="class_id")
+     */
+    private $class;
+
 
 
     public function __construct()
@@ -686,6 +691,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTuteurs(?Tuteurs $tuteurs): self
     {
         $this->tuteurs = $tuteurs;
+
+        return $this;
+    }
+
+    public function getClass(): ?Classes
+    {
+        return $this->class;
+    }
+
+    public function setClass(?Classes $class): self
+    {
+        $this->class = $class;
 
         return $this;
     }
