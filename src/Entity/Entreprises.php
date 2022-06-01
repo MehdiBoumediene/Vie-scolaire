@@ -66,20 +66,12 @@ class Entreprises
      */
     private $tuteurs;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="entreprise")
-     */
-    private $users;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="entreprises")
-     */
-    private $user;
 
     public function __construct()
     {
         $this->tuteurs = new ArrayCollection();
-        $this->users = new ArrayCollection();
+     
     }
 
     public function getId(): ?int
@@ -213,45 +205,5 @@ class Entreprises
         return $this;
     }
 
-    /**
-     * @return Collection<int, Users>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(Users $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setEntreprise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Users $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getEntreprise() === $this) {
-                $user->setEntreprise(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getUser(): ?Users
-    {
-        return $this->user;
-    }
-
-    public function setUser(?Users $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
+  
 }
