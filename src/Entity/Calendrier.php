@@ -67,14 +67,11 @@ class Calendrier
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="calendrier")
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="calendriers")
      */
     private $classe;
 
-    public function __construct()
-    {
-        $this->classe = new ArrayCollection();
-    }
+   
 
     public function getId(): ?int
     {
@@ -189,33 +186,17 @@ class Calendrier
         return $this;
     }
 
-    /**
-     * @return Collection<int, Classes>
-     */
-    public function getClasse(): Collection
+    public function getClasse(): ?Classes
     {
         return $this->classe;
     }
 
-    public function addClasse(Classes $classe): self
+    public function setClasse(?Classes $classe): self
     {
-        if (!$this->classe->contains($classe)) {
-            $this->classe[] = $classe;
-            $classe->setCalendrier($this);
-        }
+        $this->classe = $classe;
 
         return $this;
     }
 
-    public function removeClasse(Classes $classe): self
-    {
-        if ($this->classe->removeElement($classe)) {
-            // set the owning side to null (unless already changed)
-            if ($classe->getCalendrier() === $this) {
-                $classe->setCalendrier(null);
-            }
-        }
 
-        return $this;
-    }
 }

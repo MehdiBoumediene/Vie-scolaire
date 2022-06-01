@@ -52,7 +52,7 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>true
+                'multiple'=>false
             ])
 
             ->remove('type')
