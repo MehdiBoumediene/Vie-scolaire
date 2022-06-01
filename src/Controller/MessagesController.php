@@ -9,6 +9,7 @@ use App\Form\MessagesType;
 use App\Entity\Messages;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\UsersRepository;
+use ContainerRyTOw3N\getResponseService;
 
 class MessagesController extends AbstractController
 {
@@ -62,5 +63,34 @@ class MessagesController extends AbstractController
 
         return $this->render('messages/readMessage.html.twig', compact("message") );
             
+    }
+
+  /**
+     * @Route("/messages-repond", name="app_repond_messages")
+     */
+    public function answerMessage(Request $request) :Response
+    {
+
+        $message = new Messages;
+        $form = $this->createForm(MessagesType::class, $message);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $message->setSender($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($message);
+            $em->flush();
+
+            $this->addFlash("message","Le message à été envoyé avec succès.");
+            $request->getSession()
+            ->getFlashBag()
+            ->add('message', 'Le message à été envoyé avec succès.');
+            return $this->redirectToRoute('app_messages');
+        }
+
+        return $this->render('messages/envoiMessages.html.twig', [
+            'controller_name' => 'MessagesController',
+            'form'=> $form->createView(),
+        ]);
+
     }
 }
