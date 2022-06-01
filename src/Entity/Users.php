@@ -141,15 +141,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $module;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Tuteurs::class, inversedBy="users")
-     */
-    private $tuteurs;
+ 
 
     /**
      * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="class_id")
      */
     private $class;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Tuteurs::class, mappedBy="users")
+     */
+    private $tuteur;
 
 
 
@@ -166,6 +168,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
         $this->module = new ArrayCollection();
+        $this->tuteur = new ArrayCollection();
       
     }
 
@@ -683,17 +686,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTuteurs(): ?Tuteurs
-    {
-        return $this->tuteurs;
-    }
-
-    public function setTuteurs(?Tuteurs $tuteurs): self
-    {
-        $this->tuteurs = $tuteurs;
-
-        return $this;
-    }
 
     public function getClass(): ?Classes
     {
@@ -703,6 +695,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setClass(?Classes $class): self
     {
         $this->class = $class;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tuteurs>
+     */
+    public function getTuteur(): Collection
+    {
+        return $this->tuteur;
+    }
+
+    public function addTuteur(Tuteurs $tuteur): self
+    {
+        if (!$this->tuteur->contains($tuteur)) {
+            $this->tuteur[] = $tuteur;
+            $tuteur->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTuteur(Tuteurs $tuteur): self
+    {
+        if ($this->tuteur->removeElement($tuteur)) {
+            // set the owning side to null (unless already changed)
+            if ($tuteur->getUsers() === $this) {
+                $tuteur->setUsers(null);
+            }
+        }
 
         return $this;
     }
