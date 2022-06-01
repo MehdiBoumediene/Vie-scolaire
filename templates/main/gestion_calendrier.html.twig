@@ -55,6 +55,11 @@
 
 								<div class="row">
 									<div id='calendrier'></div>
+
+
+									<button type="button" class="btn mr-2 mb-2 btn-primary lancer" data-toggle="modal" data-target=".bd-example-modal-lg" style="display:none;">Large modal</button>
+
+
 								</div>
 
 
@@ -70,7 +75,7 @@
 
 	{% endblock %}
 	{% block javascripts %}
-
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 		<script>
 
 			window.onload = () => {
@@ -106,7 +111,51 @@ startTime: '10:00', // 10am
 endTime: '17:00' // 4pm
 }
 ],
-events: {{ data|raw() }}
+
+editable: true,
+events: {{ data|raw() }},
+
+eventClick: function (info) {
+let jour = info.event.start.getDay();
+let mois = info.event.start.getMonth();
+if (jour < 10) {
+jour = '0' + info.event.start.getDay()
+}
+if (mois < 10) {
+mois = '0' + info.event.start.getMonth()
+}
+
+let jour_end = info.event.end.getDay();
+let mois_end = info.event.end.getMonth();
+
+if (jour_end < 10) {
+jour_end = '0' + info.event.end.getDay()
+}
+if (mois_end < 10) {
+mois_end = '0' + info.event.end.getMonth()
+}
+
+
+$('.lancer').click();
+$('.titre').remove();
+$('.detail').remove();
+$('.du').remove();
+$('.au').remove();
+$('.classe').remove();
+
+$('.modal-title').append('<span class="titre">' + info.event.title + '</span>');
+$('.modal-body').append('<span class="du"><b>Début : </b> ' + jour + '/' + mois + '/' + info.event.start.getFullYear() + ' à ' + info.event.start.getHours() + 'H' + ':' + info.event.start.getMinutes() + '<br></span>');
+$('.modal-body').append('<span class="au"><b>Fin : </b> ' + jour_end + '/' + mois_end + '/' + info.event.end.getFullYear() + ' à ' + info.event.end.getHours() + 'H' + ':' + info.event.end.getMinutes() + '<br><br></span>');
+
+$('.modal-body').append('<span class="classe"><b>Classe : </b> ' + info.event.extendedProps.classe + '<br><br></span>');
+
+
+$('.modal-body').append('<span class="detail"><b>Commentaire:</b><br> ' + info.event.extendedProps.description + '<br></span>');
+
+
+// change the border color just for fun
+info.el.style.borderColor = 'red';
+}
 
 })
 
