@@ -76,7 +76,7 @@ class Classes
     /**
      * @ORM\OneToMany(targetEntity=Calendrier::class, mappedBy="classe")
      */
-    private $calendriers;
+    private $calendrier;
 
     public function __construct()
     {
@@ -324,15 +324,15 @@ class Classes
     /**
      * @return Collection<int, Calendrier>
      */
-    public function getCalendriers(): Collection
+    public function getCalendrier(): Collection
     {
-        return $this->calendriers;
+        return $this->calendrier;
     }
 
     public function addCalendrier(Calendrier $calendrier): self
     {
-        if (!$this->calendriers->contains($calendrier)) {
-            $this->calendriers[] = $calendrier;
+        if (!$this->calendrier->contains($calendrier)) {
+            $this->calendrier[] = $calendrier;
             $calendrier->setClasse($this);
         }
 
@@ -341,7 +341,7 @@ class Classes
 
     public function removeCalendrier(Calendrier $calendrier): self
     {
-        if ($this->calendriers->removeElement($calendrier)) {
+        if ($this->calendrier->removeElement($calendrier)) {
             // set the owning side to null (unless already changed)
             if ($calendrier->getClasse() === $this) {
                 $calendrier->setClasse(null);
