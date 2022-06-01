@@ -38,6 +38,7 @@ class MainController extends AbstractController
                 'textColor' => $event->getTextColor(),
                 'title' => $event->getTitre(),
                 'description' => $event->getDescription(),
+                'classe' => $event->getClasse()->getNom(),
                 'textColor' => $event->getTextColor(),
                 'allDay' => $event->getAllDay(),
                 'type' => $event->getType(),
@@ -58,6 +59,12 @@ class MainController extends AbstractController
         $events = $calendrier->findAll();
         $rdvs = [];
         foreach ($events as $event){
+
+            foreach ($event->getClasse() as $classe){
+                $rdvs[] = [
+                'classe' => $classe->getNom(),
+            ];
+            }
 
             $rdvs[] = [
                 'id' => $event->getId(),
