@@ -76,13 +76,14 @@ class UsersType extends AbstractType
             ])
 
 
-            ->add('tuteurs', EntityType::class, [
+            ->add('tuteur', EntityType::class, [
                 'class' => Tuteurs::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
+                'multiple' => true,
             ])
         ;
     }

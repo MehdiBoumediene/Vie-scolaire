@@ -61,10 +61,7 @@ class Tuteurs
      */
     private $entreprise;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="tuteurs")
-     */
-    private $user;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Etudiants::class, mappedBy="tuteurs")
@@ -72,14 +69,16 @@ class Tuteurs
     private $etudiants;
 
     /**
-     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="tuteurs")
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="tuteur")
      */
     private $users;
+
+    
 
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
-        $this->users = new ArrayCollection();
+       
     }
 
   
@@ -185,17 +184,7 @@ class Tuteurs
         return $this;
     }
 
-    public function getUser(): ?Users
-    {
-        return $this->user;
-    }
 
-    public function setUser(?Users $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Etudiants>
@@ -227,33 +216,16 @@ class Tuteurs
         return $this;
     }
 
-    /**
-     * @return Collection<int, Users>
-     */
-    public function getUsers(): Collection
+    public function getUsers(): ?Users
     {
         return $this->users;
     }
 
-    public function addUser(Users $user): self
+    public function setUsers(?Users $users): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setTuteurs($this);
-        }
+        $this->users = $users;
 
         return $this;
     }
 
-    public function removeUser(Users $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getTuteurs() === $this) {
-                $user->setTuteurs(null);
-            }
-        }
-
-        return $this;
-    }
 }
