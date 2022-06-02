@@ -67,9 +67,24 @@ class Calendrier
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="calendriers")
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="calendrier")
      */
     private $classe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Blocs::class, inversedBy="calendriers")
+     */
+    private $bloc;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Modules::class, inversedBy="calendriers")
+     */
+    private $module;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="calendriers")
+     */
+    private $intervenant;
 
    
 
@@ -194,6 +209,42 @@ class Calendrier
     public function setClasse(?Classes $classe): self
     {
         $this->classe = $classe;
+
+        return $this;
+    }
+
+    public function getBloc(): ?Blocs
+    {
+        return $this->bloc;
+    }
+
+    public function setBloc(?Blocs $bloc): self
+    {
+        $this->bloc = $bloc;
+
+        return $this;
+    }
+
+    public function getModule(): ?Modules
+    {
+        return $this->module;
+    }
+
+    public function setModule(?Modules $module): self
+    {
+        $this->module = $module;
+
+        return $this;
+    }
+
+    public function getIntervenant(): ?Users
+    {
+        return $this->intervenant;
+    }
+
+    public function setIntervenant(?Users $intervenant): self
+    {
+        $this->intervenant = $intervenant;
 
         return $this;
     }

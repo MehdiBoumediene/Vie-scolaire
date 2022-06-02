@@ -142,13 +142,18 @@ $('.detail').remove();
 $('.du').remove();
 $('.au').remove();
 $('.classe').remove();
+$('.bloc').remove();
+$('.module').remove();
+$('.intervenant').remove();
 
 $('.modal-title').append('<span class="titre">' + info.event.title + '</span>');
 $('.modal-body').append('<span class="du"><b>Début : </b> ' + jour + '/' + mois + '/' + info.event.start.getFullYear() + ' à ' + info.event.start.getHours() + 'H' + ':' + info.event.start.getMinutes() + '<br></span>');
 $('.modal-body').append('<span class="au"><b>Fin : </b> ' + jour_end + '/' + mois_end + '/' + info.event.end.getFullYear() + ' à ' + info.event.end.getHours() + 'H' + ':' + info.event.end.getMinutes() + '<br><br></span>');
 
-$('.modal-body').append('<span class="classe"><b>Classe : </b> ' + info.event.extendedProps.classe + '<br><br></span>');
-
+$('.modal-body').append('<span class="classe"><b>Classe : </b> ' + info.event.extendedProps.classe + '<br></span>');
+$('.modal-body').append('<span class="bloc"><b>Bloc : </b> ' + info.event.extendedProps.bloc + '<br></span>');
+$('.modal-body').append('<span class="module"><b>Module : </b> ' + info.event.extendedProps.module + '<br></span>');
+$('.modal-body').append('<span class="intervenant"><b>Intervenant : </b> ' + info.event.extendedProps.intervenant + '<br><br></span>');
 
 $('.modal-body').append('<span class="detail"><b>Commentaire:</b><br> ' + info.event.extendedProps.description + '<br></span>');
 

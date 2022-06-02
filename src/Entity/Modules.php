@@ -71,6 +71,11 @@ class Modules
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calendrier::class, mappedBy="module")
+     */
+    private $calendriers;
+
 
 
    
@@ -82,6 +87,7 @@ class Modules
         $this->etudiants = new ArrayCollection();
         $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        $this->calendriers = new ArrayCollection();
         
     }
 
@@ -272,6 +278,36 @@ class Modules
     public function setUsers(?Users $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Calendrier>
+     */
+    public function getCalendriers(): Collection
+    {
+        return $this->calendriers;
+    }
+
+    public function addCalendrier(Calendrier $calendrier): self
+    {
+        if (!$this->calendriers->contains($calendrier)) {
+            $this->calendriers[] = $calendrier;
+            $calendrier->setModule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendrier(Calendrier $calendrier): self
+    {
+        if ($this->calendriers->removeElement($calendrier)) {
+            // set the owning side to null (unless already changed)
+            if ($calendrier->getModule() === $this) {
+                $calendrier->setModule(null);
+            }
+        }
 
         return $this;
     }

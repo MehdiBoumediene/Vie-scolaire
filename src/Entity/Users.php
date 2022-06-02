@@ -56,10 +56,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $created_by;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Classes::class, inversedBy="users")
-     */
-    private $classe;
 
   
 
@@ -73,10 +69,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $received;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="user")
-     */
-    private $classes;
+ 
 
     /**
      * @ORM\OneToMany(targetEntity=Blocs::class, mappedBy="user")
@@ -144,23 +137,26 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
  
 
     /**
-     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="class_id")
-     */
-    private $class;
-
-    /**
      * @ORM\OneToMany(targetEntity=Tuteurs::class, mappedBy="users")
      */
     private $tuteur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Classes::class, inversedBy="users")
+     */
+    private $classe;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Calendrier::class, mappedBy="intervenant")
+     */
+    private $calendriers;
 
 
 
     public function __construct()
     {
-        $this->classe = new ArrayCollection();
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
-        $this->classes = new ArrayCollection();
         $this->blocs = new ArrayCollection();
         $this->intervenants = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
@@ -169,6 +165,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->documents = new ArrayCollection();
         $this->module = new ArrayCollection();
         $this->tuteur = new ArrayCollection();
+        $this->classe = new ArrayCollection();
+        $this->calendriers = new ArrayCollection();
+       
       
     }
 
@@ -298,30 +297,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Classes>
-     */
-    public function getClasse(): Collection
-    {
-        return $this->classe;
-    }
-
-    public function addClasse(Classes $classe): self
-    {
-        if (!$this->classe->contains($classe)) {
-            $this->classe[] = $classe;
-        }
-
-        return $this;
-    }
-
-    public function removeClasse(Classes $classe): self
-    {
-        $this->classe->removeElement($classe);
-
-        return $this;
-    }
-
    
 
     /**
@@ -384,35 +359,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Classes>
-     */
-    public function getClasses(): Collection
-    {
-        return $this->classes;
-    }
-
-    public function addClass(Classes $class): self
-    {
-        if (!$this->classes->contains($class)) {
-            $this->classes[] = $class;
-            $class->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClass(Classes $class): self
-    {
-        if ($this->classes->removeElement($class)) {
-            // set the owning side to null (unless already changed)
-            if ($class->getUser() === $this) {
-                $class->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Blocs>
@@ -687,17 +634,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getClass(): ?Classes
-    {
-        return $this->class;
-    }
-
-    public function setClass(?Classes $class): self
-    {
-        $this->class = $class;
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Tuteurs>
@@ -728,6 +665,61 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Classes>
+     */
+    public function getClasse(): Collection
+    {
+        return $this->classe;
+    }
+
+    public function addClasse(Classes $classe): self
+    {
+        if (!$this->classe->contains($classe)) {
+            $this->classe[] = $classe;
+        }
+
+        return $this;
+    }
+
+    public function removeClasse(Classes $classe): self
+    {
+        $this->classe->removeElement($classe);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Calendrier>
+     */
+    public function getCalendriers(): Collection
+    {
+        return $this->calendriers;
+    }
+
+    public function addCalendrier(Calendrier $calendrier): self
+    {
+        if (!$this->calendriers->contains($calendrier)) {
+            $this->calendriers[] = $calendrier;
+            $calendrier->setIntervenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendrier(Calendrier $calendrier): self
+    {
+        if ($this->calendriers->removeElement($calendrier)) {
+            // set the owning side to null (unless already changed)
+            if ($calendrier->getIntervenant() === $this) {
+                $calendrier->setIntervenant(null);
+            }
+        }
+
+        return $this;
+    }
+
 
    
 }
