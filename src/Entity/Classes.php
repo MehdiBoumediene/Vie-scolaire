@@ -66,15 +66,17 @@ class Classes
      */
     private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Calendrier::class, inversedBy="classe")
-     */
-    private $calendrier;
+ 
 
     /**
      * @ORM\OneToMany(targetEntity=Users::class, mappedBy="class")
      */
     private $class_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Calendrier::class, mappedBy="classe")
+     */
+    private $calendrier;
 
     public function __construct()
     {
@@ -84,6 +86,7 @@ class Classes
         $this->intervenants = new ArrayCollection();
         $this->modules = new ArrayCollection();
         $this->class_id = new ArrayCollection();
+        $this->calendriers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -286,17 +289,7 @@ class Classes
         return $this;
     }
 
-    public function getCalendrier(): ?Calendrier
-    {
-        return $this->calendrier;
-    }
-
-    public function setCalendrier(?Calendrier $calendrier): self
-    {
-        $this->calendrier = $calendrier;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Users>
@@ -322,6 +315,36 @@ class Classes
             // set the owning side to null (unless already changed)
             if ($classId->getClass() === $this) {
                 $classId->setClass(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Calendrier>
+     */
+    public function getCalendrier(): Collection
+    {
+        return $this->calendrier;
+    }
+
+    public function addCalendrier(Calendrier $calendrier): self
+    {
+        if (!$this->calendrier->contains($calendrier)) {
+            $this->calendrier[] = $calendrier;
+            $calendrier->setClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendrier(Calendrier $calendrier): self
+    {
+        if ($this->calendrier->removeElement($calendrier)) {
+            // set the owning side to null (unless already changed)
+            if ($calendrier->getClasse() === $this) {
+                $calendrier->setClasse(null);
             }
         }
 

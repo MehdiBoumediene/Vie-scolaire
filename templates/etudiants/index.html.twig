@@ -87,7 +87,7 @@
 														<td class="sorting_1 dtr-control">
 															{% for tuteurs in etudiant.tuteur %}
 																{% if tuteurs.nom %}
-																	<a href="{{ path('app_tuteurs_show', {'id': tuteurs.id}) }}">
+																	<a href="{{ path('app_tuteurs_show',{'id': tuteurs.id}) }}">
 																		{{tuteurs.nom}}</a>
 																{% endif %}
 															{% else %}
@@ -97,8 +97,10 @@
 															{% endfor %}
 														</td>
 														<td class="sorting_1 dtr-control">
-															{% for classes in etudiant.classes %}
-																<a href="{{ path('app_classes_show', {'id': classes.id}) }}">{{ classes.nom }}</a>
+															{% for classe in etudiant.classes %}
+															
+																<a href="{{ path('app_classes_show', {'id': classe.id}) }}">{{ classe.nom }}</a>
+														       
 															{% endfor %}
 														</td>
 														<td class="sorting_1 dtr-control">
