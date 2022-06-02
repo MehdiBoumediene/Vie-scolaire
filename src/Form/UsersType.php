@@ -54,7 +54,7 @@ class UsersType extends AbstractType
             ->add('prenom', TextType::class)
             ->add('adresse',TextType::class)
             ->add('telephone',TelType::class)
-            ->add('classes', EntityType::class, [
+            ->add('classe', EntityType::class, [
                 'class' => Classes::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
