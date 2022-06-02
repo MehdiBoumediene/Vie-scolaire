@@ -66,6 +66,11 @@ class Absences
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="absences")
+     */
+    private $classe;
+
     public function __construct()
     {
         $this->etudiant = new ArrayCollection();
@@ -205,6 +210,18 @@ class Absences
     public function setUser(?Users $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getClasse(): ?Classes
+    {
+        return $this->classe;
+    }
+
+    public function setClasse(?Classes $classe): self
+    {
+        $this->classe = $classe;
 
         return $this;
     }

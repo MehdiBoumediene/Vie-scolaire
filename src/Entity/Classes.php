@@ -72,6 +72,11 @@ class Classes
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Absences::class, mappedBy="classe")
+     */
+    private $absences;
+
   
 
     public function __construct()
@@ -82,6 +87,7 @@ class Classes
         $this->modules = new ArrayCollection();
         $this->calendriers = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->absences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -301,6 +307,36 @@ class Classes
     {
         if ($this->users->removeElement($user)) {
             $user->removeClasse($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Absences>
+     */
+    public function getAbsences(): Collection
+    {
+        return $this->absences;
+    }
+
+    public function addAbsence(Absences $absence): self
+    {
+        if (!$this->absences->contains($absence)) {
+            $this->absences[] = $absence;
+            $absence->setClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbsence(Absences $absence): self
+    {
+        if ($this->absences->removeElement($absence)) {
+            // set the owning side to null (unless already changed)
+            if ($absence->getClasse() === $this) {
+                $absence->setClasse(null);
+            }
         }
 
         return $this;
