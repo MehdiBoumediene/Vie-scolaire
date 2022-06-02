@@ -137,7 +137,7 @@ mois_end = '0' + info.event.end.getMonth()
 
 
 $('.lancer').click();
-$('.titre').remove();
+
 $('.detail').remove();
 $('.du').remove();
 $('.au').remove();
@@ -146,7 +146,7 @@ $('.bloc').remove();
 $('.module').remove();
 $('.intervenant').remove();
 
-$('.modal-title').append('<span class="titre">' + info.event.title + '</span>');
+
 $('.modal-body').append('<span class="du"><b>Début : </b> ' + jour + '/' + mois + '/' + info.event.start.getFullYear() + ' à ' + info.event.start.getHours() + 'H' + ':' + info.event.start.getMinutes() + '<br></span>');
 $('.modal-body').append('<span class="au"><b>Fin : </b> ' + jour_end + '/' + mois_end + '/' + info.event.end.getFullYear() + ' à ' + info.event.end.getHours() + 'H' + ':' + info.event.end.getMinutes() + '<br><br></span>');
 
