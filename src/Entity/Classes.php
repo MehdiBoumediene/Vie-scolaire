@@ -41,10 +41,6 @@ class Classes
      */
     private $blocs;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="classe")
-     */
-    private $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Etudiants::class, mappedBy="classes")
@@ -61,32 +57,31 @@ class Classes
      */
     private $modules;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="classes")
-     */
-    private $user;
+ 
 
  
 
-    /**
-     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="class")
-     */
-    private $class_id;
 
     /**
      * @ORM\OneToMany(targetEntity=Calendrier::class, mappedBy="classe")
      */
     private $calendrier;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="classe")
+     */
+    private $users;
+
+  
+
     public function __construct()
     {
         $this->blocs = new ArrayCollection();
-        $this->users = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
         $this->intervenants = new ArrayCollection();
         $this->modules = new ArrayCollection();
-        $this->class_id = new ArrayCollection();
         $this->calendriers = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,32 +155,7 @@ class Classes
         return $this;
     }
 
-    /**
-     * @return Collection<int, Users>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(Users $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addClasse($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Users $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeClasse($this);
-        }
-
-        return $this;
-    }
+  
 
     /**
      * @return Collection<int, Etudiants>
@@ -277,49 +247,7 @@ class Classes
         return $this;
     }
 
-    public function getUser(): ?Users
-    {
-        return $this->user;
-    }
-
-    public function setUser(?Users $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
    
-
-    /**
-     * @return Collection<int, Users>
-     */
-    public function getClassId(): Collection
-    {
-        return $this->class_id;
-    }
-
-    public function addClassId(Users $classId): self
-    {
-        if (!$this->class_id->contains($classId)) {
-            $this->class_id[] = $classId;
-            $classId->setClass($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClassId(Users $classId): self
-    {
-        if ($this->class_id->removeElement($classId)) {
-            // set the owning side to null (unless already changed)
-            if ($classId->getClass() === $this) {
-                $classId->setClass(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Calendrier>
@@ -350,4 +278,33 @@ class Classes
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Users>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeClasse($this);
+        }
+
+        return $this;
+    }
+
+   
 }

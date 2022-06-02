@@ -51,9 +51,15 @@ class Blocs
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calendrier::class, mappedBy="bloc")
+     */
+    private $calendriers;
+
     public function __construct()
     {
         $this->modules = new ArrayCollection();
+        $this->calendriers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +153,36 @@ class Blocs
     public function setUser(?Users $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Calendrier>
+     */
+    public function getCalendriers(): Collection
+    {
+        return $this->calendriers;
+    }
+
+    public function addCalendrier(Calendrier $calendrier): self
+    {
+        if (!$this->calendriers->contains($calendrier)) {
+            $this->calendriers[] = $calendrier;
+            $calendrier->setBloc($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendrier(Calendrier $calendrier): self
+    {
+        if ($this->calendriers->removeElement($calendrier)) {
+            // set the owning side to null (unless already changed)
+            if ($calendrier->getBloc() === $this) {
+                $calendrier->setBloc(null);
+            }
+        }
 
         return $this;
     }

@@ -6,9 +6,13 @@ use App\Entity\Calendrier;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\Classes;
+use App\Entity\Blocs;
+use App\Entity\Modules;
+use App\Entity\Users;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +31,9 @@ class CalendrierType extends AbstractType
                 'widget' => "single_text"
                 
             ])
-            ->add('description')
+            ->add('description',TextareaType::class,[
+                'label'=>'Commentaire'
+            ])
             ->remove('all_day')
             ->add('background_color', ColorType::class,[
                 'label' => 'Couleur du fond ',
@@ -52,6 +58,39 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
+                'multiple'=>false
+            ])
+
+            ->add('bloc', EntityType::class, [
+                'class' => Blocs::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+                'multiple'=>false
+            ])
+
+            ->add('module', EntityType::class, [
+                'class' => Modules::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => 'nom',
+                'multiple'=>false
+            ])
+
+            ->add('intervenant', EntityType::class, [
+                'class' => Users::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.email', 'ASC')
+                        ->where('u.roles LIKE :role')
+                            ->setParameter('role','%"'.'ROLE_INTERVENANT'.'"%')
+                        ;
+                },
+                'choice_label' => 'email',
                 'multiple'=>false
             ])
 
