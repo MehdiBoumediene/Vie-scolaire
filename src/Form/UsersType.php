@@ -84,6 +84,7 @@ class UsersType extends AbstractType
                 },
                 'choice_label' => 'nom',
                 'multiple' => true,
+                'required' => false,
             ])
         ;
     }
