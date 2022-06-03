@@ -97,6 +97,7 @@ class CalendrierType extends AbstractType
                 'choice_label' => 'email',
                 'multiple'=>false,
                 'required' => false,
+                
             ])
 
             ->remove('type')
