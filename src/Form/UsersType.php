@@ -61,7 +61,7 @@ class UsersType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple' => false,
+                'multiple' => true,
                 'required' => false
                 
             ])
