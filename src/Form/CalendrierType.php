@@ -33,11 +33,12 @@ class CalendrierType extends AbstractType
             ])
             ->add('description',TextareaType::class,[
                 'label'=>'Commentaire'
+                'required' => false,
             ])
             ->remove('all_day')
             ->add('background_color', ColorType::class,[
                 'label' => 'Couleur du fond ',
-                
+                'required' => false,
                 
             ])
             ->add('border_color', ColorType::class,[
@@ -58,7 +59,8 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>false
+                'multiple'=>false,
+                'required' => false,
             ])
 
             ->add('bloc', EntityType::class, [
@@ -68,7 +70,8 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>false
+                'multiple'=>false,
+                'required' => false,
             ])
 
             ->add('module', EntityType::class, [
@@ -78,7 +81,8 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>false
+                'multiple'=>false,
+                'required' => false,
             ])
 
             ->add('intervenant', EntityType::class, [
@@ -92,6 +96,7 @@ class CalendrierType extends AbstractType
                 },
                 'choice_label' => 'email',
                 'multiple'=>false
+                'required' => false,
             ])
 
             ->remove('type')

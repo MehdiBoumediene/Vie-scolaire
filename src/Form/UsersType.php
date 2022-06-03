@@ -61,7 +61,8 @@ class UsersType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple' => true,
+                'multiple' => false,
+                'required' => false
                 
             ])
             ->add('module', EntityType::class, [
