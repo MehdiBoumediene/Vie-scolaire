@@ -32,7 +32,7 @@ class CalendrierType extends AbstractType
                 
             ])
             ->add('description',TextareaType::class,[
-                'label'=>'Commentaire'
+                'label'=>'Commentaire',
                 'required' => false,
             ])
             ->remove('all_day')
@@ -97,7 +97,7 @@ class CalendrierType extends AbstractType
                 'choice_label' => 'email',
                 'multiple'=>false,
                 'required' => false,
-                
+
             ])
 
             ->remove('type')
