@@ -59,7 +59,7 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>false,
+                'multiple'=>true,
                 'required' => false,
             ])
 
@@ -70,7 +70,7 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>false,
+                'multiple'=>true,
                 'required' => false,
             ])
 
@@ -81,7 +81,7 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>false,
+                'multiple'=>true,
                 'required' => false,
             ])
 
@@ -95,7 +95,7 @@ class CalendrierType extends AbstractType
                         ;
                 },
                 'choice_label' => 'email',
-                'multiple'=>false,
+                'multiple'=>true,
                 'required' => false,
 
             ])
