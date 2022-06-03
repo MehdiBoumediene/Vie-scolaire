@@ -44,7 +44,7 @@ class ClassesController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $class->setCreatedBy($this->getUser()->getEmail());
-            $class->setUser($this->getUser());
+
             
             $class->setCreatedAt($date);
             $classesRepository->add($class);
