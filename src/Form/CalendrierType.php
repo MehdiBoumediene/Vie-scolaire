@@ -59,8 +59,8 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>true,
-                'required' => false,
+                'multiple'=>false,
+                'required' => true,
             ])
 
             ->add('bloc', EntityType::class, [
@@ -70,8 +70,8 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>true,
-                'required' => false,
+                'multiple'=>false,
+                'required' => true,
             ])
 
             ->add('module', EntityType::class, [
@@ -81,8 +81,8 @@ class CalendrierType extends AbstractType
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => 'nom',
-                'multiple'=>true,
-                'required' => false,
+                'multiple'=>false,
+                'required' => true,
             ])
 
             ->add('intervenant', EntityType::class, [
@@ -95,8 +95,8 @@ class CalendrierType extends AbstractType
                         ;
                 },
                 'choice_label' => 'email',
-                'multiple'=>true,
-                'required' => false,
+                'multiple'=>false,
+                'required' => true,
 
             ])
 
