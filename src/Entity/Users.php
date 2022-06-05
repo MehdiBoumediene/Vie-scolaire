@@ -151,6 +151,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $calendriers;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $etat = "En attente";
+
 
 
     public function __construct()
@@ -716,6 +721,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $calendrier->setIntervenant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

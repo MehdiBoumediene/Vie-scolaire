@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Repository\CalendrierRepository;
+use App\Repository\UsersRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,10 +27,11 @@ class MainController extends AbstractController
     /**
      * @Route("/gestion/calendrier", name="app_gestion_calendrier")
      */
-    public function calendrier(CalendrierRepository $calendrier): Response
+    public function calendrier(CalendrierRepository $calendrier,UsersRepository $users): Response
     {
         $events = $calendrier->findAll();
         $rdvs = [];
+        $rdvs2 = [];
         foreach ($events as $event){
 
             $rdvs[] = [
@@ -49,9 +54,58 @@ class MainController extends AbstractController
 
             ];
 
+
+            
+            $classe= $event->getClasse();
+
+
             $data = json_encode($rdvs);
+     
+            
         }
-        return $this->render('main/gestion_calendrier.html.twig',compact('data'));
+
+        $etudiants = $users->findByClasse($classe);
+        return $this->render('main/gestion_calendrier.html.twig', [
+            'etudiants_calendar' => $etudiants,
+            'data' => compact('data'),
+        ]
+    
+    );
+    }
+
+
+    
+     /**
+     * @Route("/calendrier_absences", name="app_gestion_calendrier_absences", methods={"GET", "POST"})
+     */
+    public function calendrierAbsences( EntityManagerInterface $em, Request $request): Response
+    {
+
+        $etat = $request->query->get('etat');
+        $user = $request->query->get('user');
+        $qb = $em->createQueryBuilder();
+        $q = $qb->update('App:Users', 'u')
+
+            ->set('u.etat','?1')
+     
+
+            ->where('u.id = ?2')
+
+            ->setParameter(1,$etat)
+            ->setParameter(2,$user)
+         
+            ->getQuery();
+        $p = $q->execute();
+
+  
+        $response = new JsonResponse();
+        $response->setContent(json_encode($etat));
+        $response->headers->set('Content-Type','application/json');
+
+        return $response->setData(array('etat'=>$etat,'user'=>$user));
+
+    
+  
     }
 
     /**

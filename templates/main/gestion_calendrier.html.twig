@@ -29,6 +29,7 @@
 							</div>
 							<div>Calendrier
 								<div class="page-title-subheading">Gestion du calendrier</div>
+
 							</div>
 						</div>
 						<div class="page-title-actions">
@@ -51,15 +52,17 @@
 				<div class="tabs-animation">
 					<div class="main-card mb-3 card">
 						<div class="card-body">
+	
 							<div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
 								<div class="row">
+	
 									<div id='calendrier'></div>
 
 
 									<button type="button" class="btn mr-2 mb-2 btn-primary lancer" data-toggle="modal" data-target=".bd-example-modal-lg" style="display:none;">Large modal</button>
 
-
+	
 								</div>
 
 
@@ -72,6 +75,7 @@
 			</div>
 
 		</div>
+
 
 	{% endblock %}
 	{% block javascripts %}
@@ -113,7 +117,7 @@ endTime: '17:00' // 4pm
 ],
 
 editable: true,
-events: {{ data|raw() }},
+events: {{ data.data|raw() }},
 
 eventClick: function (info) {
 let jour = info.event.start.getDay();
@@ -145,7 +149,30 @@ $('.classe').remove();
 $('.bloc').remove();
 $('.module').remove();
 $('.intervenant').remove();
+$('.table_etudiants').hide();
 
+$( ".etudiants" ).click(function() {
+$('.detail').remove();
+$('.du').remove();
+$('.au').remove();
+$('.classe').remove();
+$('.bloc').remove();
+$('.module').remove();
+$('.intervenant').remove();
+
+$('.table_etudiants').show();
+});
+
+
+$( ".informations" ).click(function() {
+
+	$('.detail').remove();
+$('.du').remove();
+$('.au').remove();
+$('.classe').remove();
+$('.bloc').remove();
+$('.module').remove();
+$('.intervenant').remove();
 
 $('.modal-body').append('<span class="du"><b>Début : </b> ' + jour + '/' + mois + '/' + info.event.start.getFullYear() + ' à ' + info.event.start.getHours() + 'H' + ':' + info.event.start.getMinutes() + '<br></span>');
 $('.modal-body').append('<span class="au"><b>Fin : </b> ' + jour_end + '/' + mois_end + '/' + info.event.end.getFullYear() + ' à ' + info.event.end.getHours() + 'H' + ':' + info.event.end.getMinutes() + '<br><br></span>');
@@ -154,6 +181,28 @@ $('.modal-body').append('<span class="classe"><b>Classe : </b> ' + info.event.ex
 $('.modal-body').append('<span class="bloc"><b>Bloc : </b> ' + info.event.extendedProps.bloc + '<br></span>');
 $('.modal-body').append('<span class="module"><b>Module : </b> ' + info.event.extendedProps.module + '<br></span>');
 $('.modal-body').append('<span class="intervenant"><b>Intervenant : </b> ' + info.event.extendedProps.intervenant + '<br><br></span>');
+
+
+$('.modal-body').append('<span class="intervenant"><b>Etudiants : </b> ' +  info.event.extendedProps.etudiants + '<br><br></span>');
+
+
+$('.modal-body').append('<span class="detail"><b>Commentaire:</b><br> ' + info.event.extendedProps.description + '<br></span>');
+
+
+$('.table_etudiants').hide();
+});
+
+$('.modal-body').append('<span class="du"><b>Début : </b> ' + jour + '/' + mois + '/' + info.event.start.getFullYear() + ' à ' + info.event.start.getHours() + 'H' + ':' + info.event.start.getMinutes() + '<br></span>');
+$('.modal-body').append('<span class="au"><b>Fin : </b> ' + jour_end + '/' + mois_end + '/' + info.event.end.getFullYear() + ' à ' + info.event.end.getHours() + 'H' + ':' + info.event.end.getMinutes() + '<br><br></span>');
+
+$('.modal-body').append('<span class="classe"><b>Classe : </b> ' + info.event.extendedProps.classe + '<br></span>');
+$('.modal-body').append('<span class="bloc"><b>Bloc : </b> ' + info.event.extendedProps.bloc + '<br></span>');
+$('.modal-body').append('<span class="module"><b>Module : </b> ' + info.event.extendedProps.module + '<br></span>');
+$('.modal-body').append('<span class="intervenant"><b>Intervenant : </b> ' + info.event.extendedProps.intervenant + '<br><br></span>');
+
+
+$('.modal-body').append('<span class="intervenant"><b>Etudiants : </b> ' +  info.event.extendedProps.etudiants + '<br><br></span>');
+
 
 $('.modal-body').append('<span class="detail"><b>Commentaire:</b><br> ' + info.event.extendedProps.description + '<br></span>');
 
@@ -167,4 +216,9 @@ info.el.style.borderColor = 'red';
 calendar.render()
 }
 		</script>
+	{% endblock %}
+
+	{% block modal %}
+
+	{{ block("modal", "Menus/modal.html.twig") }}
 	{% endblock %}
