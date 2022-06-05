@@ -19,7 +19,7 @@
                                     <i class="pe-7s-diamond icon-gradient bg-strong-bliss"></i>
                                 </div>
                                 <div>Messagerie
-                                    <div class="page-title-subheading"> {{message.objet}}</div>
+                                    <div class="page-title-subheading"></div>
                                 </div>
                             </div>
                                <div class="page-title-actions">
@@ -86,23 +86,30 @@
                         </small>
                         </div>
 
-                      
-
                     </div>
               
-     
-
                 </div>
+                <form action="{{ path('app_read_messages', {'id': message.id}) }}" method="post">
                 <div class="app-inner-layout__bottom-pane d-block text-center">
                     <div class="mb-0 position-relative row form-group">
-                        <div class="col-sm-12">
-                            <input placeholder="Répondre..." type="text" class="form-control-lg form-control">
-                        </div>
-                          <div>
-                          <br> 
-                          <a href="{{ path('app_envoi_messages') }}">
-                          <button class="mt-1 btn btn-primary">Envoyer  </button>
-                          </a>
+                      
+                    <div class="col-sm-12">
+                   {{ form_start(form) }}
+                           {{ form_row(form.message,{'attr': {'class': 'form-control'}}) }}
+                           {{ form_row(form.recipient,{'attr': {'class': 'form-control','value': message.sender.email}}) }}
+
+
+                        <button class="mt-1 btn btn-success">{{ button_label|default('Repondre') }}</button> ou <a href="{{ path('app_messages') }}">Retour à la liste</a>
+
+                    {{ form_end(form) }}
+
+    
+                    </div>
+                      
+                    <div>
+                    <br> 
+                    </form>
+                
                         </div>
                     </div>
                 </div>

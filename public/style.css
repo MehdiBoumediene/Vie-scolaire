@@ -34,3 +34,10 @@ a {
 {
   display : none;
 }
+
+
+.select#reponse_recipient.form-control
+{
+  display : none;
+
+}

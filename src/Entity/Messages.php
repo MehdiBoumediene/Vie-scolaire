@@ -20,7 +20,7 @@ class Messages
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable="true")
      */
     private $objet;
 
@@ -41,13 +41,13 @@ class Messages
 
     /**
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="sent")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $sender;
 
     /**
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="received")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $recipient;
 
@@ -133,4 +133,10 @@ class Messages
 
         return $this;
     }
+
+
+   public function __toString()
+   {
+       return $this;
+   } 
 }
