@@ -30,7 +30,6 @@ a {
   color: #434344 !important;
 }
 
-.pe-7s-info:before
-{
-  display : none;
+.pe-7s-info:before {
+  display: none;
 }
