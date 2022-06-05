@@ -202,11 +202,11 @@
                     <th>Nom / Prenom <br><br></th>
                     <th>Etat <br><br></th>
 				{% if etudiants_calendar %}
-                        
+                        	{% for etudiant in etudiants_calendar %}
 						<tr style="border-bottom: solid 1px  #dddddd;">
 						<td style="padding-right:30px;     padding-bottom: 10px;">
 					
-						{% for etudiant in etudiants_calendar %}
+					
 						{{etudiant.prenom}} {{etudiant.nom}}<br>
 						</td>
 							<td style="    padding-bottom: 10px;">
