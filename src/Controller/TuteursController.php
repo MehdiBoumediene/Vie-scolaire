@@ -38,7 +38,7 @@ class TuteursController extends AbstractController
             $date = new \DateTimeImmutable('now');
          
             $tuteur->setCreatedBy($this->getUser()->getEmail());
-            $tuteur->setUser($this->getUser());
+            $tuteur->setUsers($this->getUser());
             $tuteur->setCreatedAt($date);
             $tuteursRepository->add($tuteur);
             return $this->redirectToRoute('app_tuteurs_index', [], Response::HTTP_SEE_OTHER);
