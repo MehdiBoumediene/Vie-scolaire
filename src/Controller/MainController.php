@@ -111,17 +111,11 @@ class MainController extends AbstractController
     /**
      * @Route("/calendrier_etudiant", name="app_calendrier_etudiant")
      */
-    public function calendrierEtudiant(CalendrierRepository $calendrier): Response
+    public function calendrierEtudiant(CalendrierRepository $calendrier,UsersRepository $users): Response
     {
         $events = $calendrier->findAll();
         $rdvs = [];
         foreach ($events as $event){
-
-            foreach ($event->getClasse() as $classe){
-                $rdvs[] = [
-                'classe' => $classe->getNom(),
-            ];
-            }
 
             $rdvs[] = [
                 'id' => $event->getId(),
@@ -132,6 +126,10 @@ class MainController extends AbstractController
                 'textColor' => $event->getTextColor(),
                 'title' => $event->getTitre(),
                 'description' => $event->getDescription(),
+                'classe' => $event->getClasse()->getNom(),
+                'bloc' => $event->getBloc()->getNom(),
+                'module' => $event->getModule()->getNom(),
+                'intervenant' => $event->getIntervenant()->getNom(),
                 'textColor' => $event->getTextColor(),
                 'allDay' => $event->getAllDay(),
                 'type' => $event->getType(),
@@ -140,8 +138,16 @@ class MainController extends AbstractController
             ];
 
             $data = json_encode($rdvs);
+            $classe= $event->getClasse();
         }
-        return $this->render('main/calendrier_etudiant.html.twig',compact('data'));
+        $etudiants = $users->findByClasse($classe);
+        return $this->render('main/gestion_calendrier.html.twig', [
+            'etudiants_calendar' => $etudiants,
+            'data' => compact('data'),
+        ]
+    
+    );
+ 
     }
 
      /**
