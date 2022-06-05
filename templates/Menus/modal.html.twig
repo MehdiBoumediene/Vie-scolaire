@@ -290,9 +290,7 @@
                                                         {% set retard = 0 %}
                                                         {% set colorretard = 0 %}
                         
-                                                        <div class="absent prog{{ etudiant.id }}">
-                            
-                                                        </div>
+                                                   <span style="display:none;" class="etudiant_id">{{ etudiant.id }}</span>
                                                         <span id="etat{{ etudiant.id }}" data-toggle="dropdown" class="colored_select badge status-issued progst" style="background: transparent; margin-top: -45px; border: none; box-shadow: none; color: white;     padding: 2px 8px;" data-original-title="" title="">
 
   <i class="fa fa-fw" aria-hidden="true" title="Copy to use angle-down" style="float: right;"></i>                                                   <span class="etat">{{ etudiant.etat }}</span>
@@ -379,7 +377,7 @@
          url: "{{ path('app_gestion_calendrier_absences', {'etat': 'En attente','user': "+$('.user_id').text() +"})}}",
             data: {
             etat: "En attente",
-            user: $('.user_id').text(),
+            user: $('.etudiant_id').text(),
 
 
                 }, success: function (data) { // $('#magasinDatas').html(data);
@@ -405,7 +403,7 @@
          url: "{{ path('app_gestion_calendrier_absences', {'etat': 'En attente','user': "+$('.user_id').text() +"})}}",
             data: {
             etat: "Présent",
-            user: $('.user_id').text(),
+            user: $('.etudiant_id').text(),
 
 
                 }, success: function (data) { // $('#magasinDatas').html(data);
@@ -431,7 +429,7 @@
          url: "{{ path('app_gestion_calendrier_absences', {'etat': 'En attente','user': "+$('.user_id').text() +"})}}",
             data: {
             etat: "En retard",
-            user: $('.user_id').text(),
+            user: $('.etudiant_id').text(),
 
 
                 }, success: function (data) { // $('#magasinDatas').html(data);
@@ -456,7 +454,7 @@
          url: "{{ path('app_gestion_calendrier_absences', {'etat': 'En attente','user': "+$('.user_id').text() +"})}}",
             data: {
             etat: "Absent",
-            user: $('.user_id').text(),
+            user: $('.etudiant_id').text(),
 
 
                 },
