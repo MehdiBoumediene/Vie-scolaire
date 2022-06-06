@@ -54,16 +54,15 @@
             <div class="col-md-6">
     <div class="main-card mb-3 card">
         <div class="card-header">Informations</div>
-        <div class="card-body">
-    
+        <div class="card-body"> 
             <p><b>Email :</b> {{user.email}}</p>
-            <p><b>Role :</b> {{user.roles[0]}}</p>
-       
-        </div>
-    
+            <p><b>Role :</b> {{user.roles[0]}}</p>  
+        </div> 
     </div>
-    
 </div>
+
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
                 <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -75,7 +74,10 @@
                         </div>
                     </div>
                 </div>
+ {#% endif %#}
 
+
+{#% if is_granted('ROLE_INTERVENANT','ROLE_ADMIN') %#}
       <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -89,8 +91,10 @@
                         </div>
                     </div>
      </div>
-         
+ {#% endif %#}  
 
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN') %#}
      <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -103,18 +107,10 @@
                             </ul>
                         </div>
                     </div>
-     </div>    
- <div class="col-md-6">
-                    <div class="main-card mb-3 card">
-                        <div class="card-body">
-                            <h5 class="card-title">Classe</h5>
-                            <ul class="list-group list-group-flush">
-                        {#{ user.classe.nom }#}
-                           
-                            </ul>
-                        </div>
-                    </div>
-</div>
+     </div>   
+{#% endif %#} 
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN') %#}
     <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -130,7 +126,38 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+    </div>
+{#% endif %#}  
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
+ <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Classe</h5>
+                            <ul class="list-group list-group-flush">
+                        {#{ user.classe.nom }#}
+                           
+                            </ul>
+                        </div>
+                    </div>
+</div>
+{#% endif %#} 
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
+          <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Modules</h5>
+                            <ul class="list-group list-group-flush">
+                       
+                           
+                            </ul>
+                        </div>
+                    </div>
+          </div>
+{#% endif %#} 
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
  <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -143,22 +170,12 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-      
+ </div>
+ {#% endif %#}      
 
-          <div class="col-md-6">
-                    <div class="main-card mb-3 card">
-                        <div class="card-body">
-                            <h5 class="card-title">Modules</h5>
-                            <ul class="list-group list-group-flush">
-                       
-                           
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
-                    <div class="col-md-6">
+ {#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}       
+    <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
                             <h5 class="card-title">Graphe d'assiduité</h5>
@@ -168,7 +185,9 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+    </div>
+{#% endif %#} 
+
             </div>
             </div>
     {{ block("Footer", "Menus/Footer.html.twig") }}
