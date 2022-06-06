@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\UsersType;
+use App\Repository\BlocsRepository;
 use App\Repository\UsersRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ModulesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -77,10 +79,16 @@ class UsersController extends AbstractController
     /**
      * @Route("/{id}", name="app_users_show", methods={"GET"})
      */
-    public function show(Users $user): Response
+    public function show(Users $user,UsersRepository $tuteurRepository,UsersRepository $intervenantsRepository,UsersRepository $etudiantsRepository): Response
     {
         return $this->render('users/show.html.twig', [
             'user' => $user,
+            /*'classe'=> $classesRepository->,*/
+           /* 'bloc' => $blocsRepository->findByClasse(array('classe'=>$classe)),*/
+           /* 'modules' => $modulesRepository->findBy(array('user'=>$user)),*/
+            'intervenants' => $intervenantsRepository->findByIntervenant(),
+            'etudiants' => $etudiantsRepository->findByEtudiant(),
+            'tuteurs' => $tuteurRepository->findByTuteur(),
         ]);
     }
 

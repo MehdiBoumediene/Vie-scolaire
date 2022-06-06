@@ -55,13 +55,13 @@
                  <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
-                            <h5 class="card-title">Interveanants</h5>
+                            <h5 class="card-title">Intervenants</h5>
                             <ul class="list-group list-group-flush">
-                                {% for intervenant in module.intervenants %}
-                                 
-                                  <a href="{{path('app_intervenants_show',{id:intervenant.id})}}" class="list-group-item">{{intervenant.prenom}} {{intervenant.nom}}</a>
-
-                                {% endfor %}
+                               {% for intervenant in intervenants %}
+                                      
+                                      <a href="{{path('app_intervenants_show',{id:intervenant.id})}}" class="list-group-item">{{intervenant.nom}}</a>
+						        
+                            {% endfor %}
                      
                             </ul>
                         </div>
@@ -83,6 +83,23 @@
                     </div>
                 </div>
   
+
+
+   <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Apprenants</h5>
+                            <ul class="list-group list-group-flush">
+                              {% for etudiant in etudiants %}
+                                 
+                                  <a href="{{path('app_etudiants_show',{id:etudiant.id})}}" class="list-group-item">{{etudiant.nom}}</a>
+
+                                {% endfor %}
+                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             </div>

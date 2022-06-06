@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Modules;
 use App\Form\ModulesType;
+use App\Repository\UsersRepository;
 use App\Repository\ModulesRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\IntervenantsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\IntervenantsRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/modules")
@@ -53,10 +54,15 @@ class ModulesController extends AbstractController
     /**
      * @Route("/{id}", name="app_modules_show", methods={"GET"})
      */
-    public function show(Modules $module): Response
+    public function show(Modules $module,UsersRepository $intervenantsRepository,UsersRepository $etudiantsRepository): Response
     {
+
+
+        
         return $this->render('modules/show.html.twig', [
             'module' => $module,
+            'intervenants' => $intervenantsRepository->findByIntervenant(),
+            'etudiants' => $etudiantsRepository->findByEtudiant(),
         
         ]);
     }

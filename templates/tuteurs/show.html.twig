@@ -70,11 +70,13 @@
                 <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
-                            <h5 class="card-title">Etudiants</h5>
-                            <ul class="list-group list-group-flush">
-                        
+                            <h5 class="card-title">Apprenants</h5>
+                                <ul class="list-group list-group-flush">
+                         {% for etudiant in etudiants %} 
+                            <a href="{{path('app_etudiants_show',{id:etudiant.id})}}" class="list-group-item"> {{ etudiant.nom}} </a>
+                          {% endfor %}
                             
-                            </ul>
+                                </ul>
                         </div>
                     </div>
                 </div>
