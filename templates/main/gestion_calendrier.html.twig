@@ -52,17 +52,17 @@
 				<div class="tabs-animation">
 					<div class="main-card mb-3 card">
 						<div class="card-body">
-	
+
 							<div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
 								<div class="row">
-	
+
 									<div id='calendrier'></div>
 
 
 									<button type="button" class="btn mr-2 mb-2 btn-primary lancer" data-toggle="modal" data-target=".bd-example-modal-lg" style="display:none;">Large modal</button>
 
-	
+
 								</div>
 
 
@@ -151,7 +151,7 @@ $('.module').remove();
 $('.intervenant').remove();
 $('.table_etudiants').hide();
 
-$( ".etudiants" ).click(function() {
+$(".etudiants").click(function () {
 $('.detail').remove();
 $('.du').remove();
 $('.au').remove();
@@ -164,9 +164,9 @@ $('.table_etudiants').show();
 });
 
 
-$( ".informations" ).click(function() {
+$(".informations").click(function () {
 
-	$('.detail').remove();
+$('.detail').remove();
 $('.du').remove();
 $('.au').remove();
 $('.classe').remove();
@@ -183,7 +183,7 @@ $('.modal-body').append('<span class="module"><b>Module : </b> ' + info.event.ex
 $('.modal-body').append('<span class="intervenant"><b>Intervenant : </b> ' + info.event.extendedProps.intervenant + '<br><br></span>');
 
 
-$('.modal-body').append('<span class="intervenant"><b>Etudiants : </b> ' +  info.event.extendedProps.etudiants + '<br><br></span>');
+$('.modal-body').append('<span class="intervenant"><b>Etudiants : </b> ' + info.event.extendedProps.etudiants + '<br><br></span>');
 
 
 $('.modal-body').append('<span class="detail"><b>Commentaire:</b><br> ' + info.event.extendedProps.description + '<br></span>');
@@ -199,8 +199,6 @@ $('.modal-body').append('<span class="classe"><b>Classe : </b> ' + info.event.ex
 $('.modal-body').append('<span class="bloc"><b>Bloc : </b> ' + info.event.extendedProps.bloc + '<br></span>');
 $('.modal-body').append('<span class="module"><b>Module : </b> ' + info.event.extendedProps.module + '<br></span>');
 $('.modal-body').append('<span class="intervenant"><b>Intervenant : </b> ' + info.event.extendedProps.intervenant + '<br><br></span>');
-
-
 
 
 $('.modal-body').append('<span class="detail"><b>Commentaire:</b><br> ' + info.event.extendedProps.description + '<br></span>');
@@ -219,5 +217,6 @@ calendar.render()
 
 	{% block modal %}
 
-	{{ block("modal", "Menus/modal.html.twig") }}
+		{{ block("modal", "Menus/modal.html.twig") }}
+		
 	{% endblock %}

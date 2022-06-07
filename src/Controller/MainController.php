@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Repository\CalendrierRepository;
 use App\Repository\UsersRepository;
+use App\Repository\AbsencesRepository;
+use App\Entity\Absences;
+use App\Entity\Users;
+use App\Form\AbsencesType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,7 +31,7 @@ class MainController extends AbstractController
     /**
      * @Route("/gestion/calendrier", name="app_gestion_calendrier")
      */
-    public function calendrier(CalendrierRepository $calendrier,UsersRepository $users): Response
+    public function calendrier(CalendrierRepository $calendrier,UsersRepository $users,Request $request, AbsencesRepository $absencesRepository): Response
     {
         $events = $calendrier->findAll();
         $rdvs = [];
@@ -65,9 +69,12 @@ class MainController extends AbstractController
         }
 
         $etudiants = $users->findByClasse($classe);
+
+         
         return $this->render('main/gestion_calendrier.html.twig', [
             'etudiants_calendar' => $etudiants,
             'data' => compact('data'),
+          
         ]
     
     );
@@ -80,22 +87,23 @@ class MainController extends AbstractController
      */
     public function calendrierAbsences( EntityManagerInterface $em, Request $request): Response
     {
-
+        $date = new \DateTimeImmutable('now');
         $etat = $request->query->get('etat');
         $user = $request->query->get('user');
-        $qb = $em->createQueryBuilder();
-        $q = $qb->update('App:Users', 'u')
 
-            ->set('u.etat','?1')
+ 
+        $sql = "INSERT INTO `absences` (`id`, `module_id`, `date`, `created_at`, `created_by`, `du`, `au`, `classe_id`, `absent`, `dateabsence`, `enretard`, `dateretard`, `present`, `datepresence`, `userid`, `user_id`) VALUES (NULL, '6', '2021-09-26 16:43:54', '2022-04-04 10:37:26', NULL, '2022-06-07 16:40:41', '2022-06-07 16:40:41', '2', '1', '2022-06-07 16:48:04', '1', '2022-06-07 16:48:04', '1', '2022-06-07 16:48:04', '1', $user)";
+        $stmt = $em->getConnection()->prepare($sql);
      
+        $result = $stmt->execute();
 
-            ->where('u.id = ?2')
+        // returns an array of Product objects
+        
 
-            ->setParameter(1,$etat)
-            ->setParameter(2,$user)
-         
-            ->getQuery();
-        $p = $q->execute();
+  
+     
+      
+
 
   
         $response = new JsonResponse();
@@ -144,6 +152,7 @@ class MainController extends AbstractController
         return $this->render('main/gestion_calendrier.html.twig', [
             'etudiants_calendar' => $etudiants,
             'data' => compact('data'),
+          
         ]
     
     );

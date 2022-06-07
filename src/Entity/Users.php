@@ -99,10 +99,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $users;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Absences::class, mappedBy="user")
-     */
-    private $absences;
+   
 
     /**
      * @ORM\OneToMany(targetEntity=Documents::class, mappedBy="user")
@@ -156,6 +153,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $etat = "En attente";
 
+    /**
+     * @ORM\OneToMany(targetEntity=Absences::class, mappedBy="user")
+     */
+    private $absences;
+
+
+
+
+   
 
 
     public function __construct()
@@ -166,12 +172,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->intervenants = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
         $this->users = new ArrayCollection();
-        $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
         $this->module = new ArrayCollection();
         $this->tuteur = new ArrayCollection();
         $this->classe = new ArrayCollection();
         $this->calendriers = new ArrayCollection();
+        $this->absences = new ArrayCollection();
+ 
+     
        
       
     }
@@ -500,35 +508,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Absences>
-     */
-    public function getAbsences(): Collection
-    {
-        return $this->absences;
-    }
-
-    public function addAbsence(Absences $absence): self
-    {
-        if (!$this->absences->contains($absence)) {
-            $this->absences[] = $absence;
-            $absence->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAbsence(Absences $absence): self
-    {
-        if ($this->absences->removeElement($absence)) {
-            // set the owning side to null (unless already changed)
-            if ($absence->getUser() === $this) {
-                $absence->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Documents>
@@ -737,6 +717,38 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, Absences>
+     */
+    public function getAbsences(): Collection
+    {
+        return $this->absences;
+    }
+
+    public function addAbsence(Absences $absence): self
+    {
+        if (!$this->absences->contains($absence)) {
+            $this->absences[] = $absence;
+            $absence->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbsence(Absences $absence): self
+    {
+        if ($this->absences->removeElement($absence)) {
+            // set the owning side to null (unless already changed)
+            if ($absence->getUser() === $this) {
+                $absence->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+   
 
    
 }
