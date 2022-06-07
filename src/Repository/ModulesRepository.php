@@ -52,7 +52,6 @@ class ModulesRepository extends ServiceEntityRepository
         ->innerJoin('u.classes', 'a')
             ->where('a.id = :classe')
             ->andWhere('u.id = :module')
-          
             ->setParameter('module', $module)
             ->setParameter('classe', $classe)
             ->orderBy('u.id', 'ASC')

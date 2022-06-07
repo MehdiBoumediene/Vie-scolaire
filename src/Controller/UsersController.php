@@ -84,7 +84,7 @@ class UsersController extends AbstractController
 
         $classe = $user->getClasse();
        /* $bloc =  $$user-->getBlocs();
-        /*$module = $classe->getModules();*/
+       /* $module = $classe->getModules();*/
 
         return $this->render('users/show.html.twig', [
             'user' => $user,

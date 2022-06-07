@@ -67,7 +67,6 @@ class BlocsRepository extends ServiceEntityRepository
         ->innerJoin('u.classes', 'a')
             ->where('a.id = :classe')
             ->andWhere('u.id = :bloc')
-          
             ->setParameter('bloc', $bloc)
             ->setParameter('classe', $classe)
             ->orderBy('u.id', 'ASC')
