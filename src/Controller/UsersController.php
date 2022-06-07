@@ -137,7 +137,6 @@ class UsersController extends AbstractController
      */
     public function showParcours(Users $user)
     {
-
         return $this->render('users/parcours.html.twig', [
             'user' => $user]);
 

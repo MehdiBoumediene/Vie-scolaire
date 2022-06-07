@@ -5,8 +5,7 @@
          {% block stylesheets %}
           <link rel="stylesheet" href="{{asset('cv.css')}}">
          {% endblock %}
-         
-
+        
 {% block body %}
   {{ block("MenuTop", "Menus/MenuTop.html.twig") }}
    <div class="app-main">
@@ -31,9 +30,7 @@
         </div> 
     </div>
 </div>
-        
-
-
+    
 <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -46,7 +43,6 @@
                         </div>
                     </div>
 </div>
-
 
         <div class="contact">
             <h2>Informations Personnelles</h2>
@@ -65,8 +61,7 @@
             <div class="contact-flex">
                 <p>Mail : </p>
                 <p> {{user.email}} pierre.giraud@ifde-learning.com </p>
-            </div>
-         
+            </div>    
          
         </div>
     </section>
