@@ -61,20 +61,67 @@ class Absences
      */
     private $au;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="absences")
-     */
-    private $user;
+  
 
     /**
      * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="absences")
      */
     private $classe;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $absent;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateabsence;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $enretard;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateretard;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $present;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $datepresence;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $userid;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="absences")
+     */
+    private $user;
+
+ 
+
+
+
+  
+
+
+
     public function __construct()
     {
         $this->etudiant = new ArrayCollection();
         $this->intervenant = new ArrayCollection();
+
+    
     }
 
     public function getId(): ?int
@@ -202,17 +249,7 @@ class Absences
         return $this;
     }
 
-    public function getUser(): ?Users
-    {
-        return $this->user;
-    }
-
-    public function setUser(?Users $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
+    
 
     public function getClasse(): ?Classes
     {
@@ -225,4 +262,105 @@ class Absences
 
         return $this;
     }
+
+    public function isAbsent(): ?bool
+    {
+        return $this->absent;
+    }
+
+    public function setAbsent(?bool $absent): self
+    {
+        $this->absent = $absent;
+
+        return $this;
+    }
+
+    public function getDateabsence(): ?\DateTimeInterface
+    {
+        return $this->dateabsence;
+    }
+
+    public function setDateabsence(?\DateTimeInterface $dateabsence): self
+    {
+        $this->dateabsence = $dateabsence;
+
+        return $this;
+    }
+
+    public function isEnretard(): ?bool
+    {
+        return $this->enretard;
+    }
+
+    public function setEnretard(?bool $enretard): self
+    {
+        $this->enretard = $enretard;
+
+        return $this;
+    }
+
+    public function getDateretard(): ?\DateTimeInterface
+    {
+        return $this->dateretard;
+    }
+
+    public function setDateretard(?\DateTimeInterface $dateretard): self
+    {
+        $this->dateretard = $dateretard;
+
+        return $this;
+    }
+
+    public function isPresent(): ?bool
+    {
+        return $this->present;
+    }
+
+    public function setPresent(?bool $present): self
+    {
+        $this->present = $present;
+
+        return $this;
+    }
+
+    public function getDatepresence(): ?\DateTimeInterface
+    {
+        return $this->datepresence;
+    }
+
+    public function setDatepresence(?\DateTimeInterface $datepresence): self
+    {
+        $this->datepresence = $datepresence;
+
+        return $this;
+    }
+
+    public function getUserid(): ?string
+    {
+        return $this->userid;
+    }
+
+    public function setUserid(?string $userid): self
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    
+
+   
+
 }
