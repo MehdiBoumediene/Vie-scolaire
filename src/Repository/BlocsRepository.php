@@ -58,6 +58,23 @@ class BlocsRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+
+    public function findblocByClasse($classe,$bloc)
+    {
+        return $this->createQueryBuilder('u')
+      
+        ->innerJoin('u.classes', 'a')
+            ->where('a.id = :classe')
+            ->andWhere('u.id = :bloc')
+          
+            ->setParameter('bloc', $bloc)
+            ->setParameter('classe', $classe)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return Blocs[] Returns an array of Blocs objects
     //  */

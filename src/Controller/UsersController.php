@@ -6,6 +6,7 @@ use App\Entity\Users;
 use App\Form\UsersType;
 use App\Repository\BlocsRepository;
 use App\Repository\UsersRepository;
+use App\Repository\ClassesRepository;
 use App\Repository\ModulesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,6 @@ class UsersController extends AbstractController
     {
         $this->passwordEncoder = $passwordEncoder;
     }
-
 
     /**
      * @Route("/", name="app_users_index", methods={"GET"})
@@ -79,13 +79,18 @@ class UsersController extends AbstractController
     /**
      * @Route("/{id}", name="app_users_show", methods={"GET"})
      */
-    public function show(Users $user,UsersRepository $tuteurRepository,UsersRepository $intervenantsRepository,UsersRepository $etudiantsRepository): Response
+    public function show(Users $user,ModulesRepository $modulesRepository,BlocsRepository $blocsRepository ,ClassesRepository $classesRepository,UsersRepository $tuteurRepository,UsersRepository $intervenantsRepository,UsersRepository $etudiantsRepository): Response
     {
+
+        $classe = $user->getClasse();
+       /* $bloc =  $$user-->getBlocs();
+        /*$module = $classe->getModules();*/
+
         return $this->render('users/show.html.twig', [
             'user' => $user,
-            /*'classe'=> $classesRepository->,*/
-           /* 'bloc' => $blocsRepository->findByClasse(array('classe'=>$classe)),*/
-           /* 'modules' => $modulesRepository->findBy(array('user'=>$user)),*/
+            'classes'=> $classesRepository->findByClasse($classe,$user),
+            /*'bloc' => $blocsRepository->findblocByClasse($classe,$bloc),*/
+            /*'modules' => $modulesRepository->findModuleByClasse($classe,$module),*/
             'intervenants' => $intervenantsRepository->findByIntervenant(),
             'etudiants' => $etudiantsRepository->findByEtudiant(),
             'tuteurs' => $tuteurRepository->findByTuteur(),
@@ -124,5 +129,17 @@ class UsersController extends AbstractController
         }
 
         return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+  /**
+     * @Route("/{id}", name="app_users_showparcours", methods={"GET"})
+     */
+    public function showParcours(Users $user)
+    {
+
+        return $this->render('users/parcours.html.twig', [
+            'user' => $user]);
+
     }
 }

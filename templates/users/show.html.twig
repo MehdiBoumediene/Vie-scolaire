@@ -62,7 +62,7 @@
 </div>
 
 
-{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
+{#% if user.roles == '' %#}
                 <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -136,7 +136,9 @@
                             <h5 class="card-title">Classe</h5>
                             <ul class="list-group list-group-flush">
                         {#{ user.classe.nom }#}
-                           
+                           {% for classe in classes %}
+                           <a href="{{path('app_classes_show',{id:classe.id})}}" class="list-group-item"> {{classe.nom}} </a>
+                           {% endfor %}
                             </ul>
                         </div>
                     </div>
