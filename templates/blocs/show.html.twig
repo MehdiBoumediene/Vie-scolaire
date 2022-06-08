@@ -55,6 +55,44 @@
                
            <div class="tabs-animation"> 
        
+
+ <div class="row">
+                 <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Modules</h5>
+                            <ul class="list-group list-group-flush">
+                                {% for module in modules %}
+                                 
+                                  <a href="{{path('app_modules_show',{id:module.id})}}" class="list-group-item">{{module.nom}}</a>
+
+                                {% endfor %}
+
+
+                     
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Classe</h5>
+                            <ul class="list-group list-group-flush">
+                 {{ bloc.classe.nom }}
+                
+                                
+
+                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+
+
           
         </div>
 </div>

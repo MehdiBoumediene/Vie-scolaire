@@ -45,6 +45,21 @@ class ClassesRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByClasse($classe,$user)
+    {
+        return $this->createQueryBuilder('u')
+      
+        ->innerJoin('u.users', 'a')
+            ->where('a.id = :user')
+            ->andWhere('u.id = :classe')
+          
+            ->setParameter('classe', $classe)
+            ->setParameter('user', $user)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return Classes[] Returns an array of Classes objects
     //  */

@@ -93,4 +93,20 @@ class IntervenantsController extends AbstractController
 
         return $this->redirectToRoute('app_intervenants_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+    /**
+     * @Route("/{id}", name="app_show_Apprenants", methods={"GET"})
+     */
+   /* public function showApprenant(UsersRepository $etudiantrepository)
+    {
+ 
+        return $this->render('intervenants/apprenantIntervenant.html.twig',[
+
+         'etudiants' => $etudiantrepository ->findByEtudiant(),
+
+        ]);
+
+    }*/
 }

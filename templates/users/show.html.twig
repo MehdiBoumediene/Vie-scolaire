@@ -54,16 +54,15 @@
             <div class="col-md-6">
     <div class="main-card mb-3 card">
         <div class="card-header">Informations</div>
-        <div class="card-body">
-    
+        <div class="card-body"> 
             <p><b>Email :</b> {{user.email}}</p>
-            <p><b>Role :</b> {{user.roles[0]}}</p>
-       
-        </div>
-    
+            <p><b>Role :</b> {{user.roles[0]}}</p>  
+        </div> 
     </div>
-    
 </div>
+
+
+{#% if user.roles == '' %#}
                 <div class="col-md-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -75,9 +74,122 @@
                         </div>
                     </div>
                 </div>
+ {#% endif %#}
 
-     
-         
+
+{#% if is_granted('ROLE_INTERVENANT','ROLE_ADMIN') %#}
+      <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Etudiants</h5>
+                            <ul class="list-group list-group-flush">
+                     {% for etudiant in etudiants %} 
+                            <a href="javascript:void(0);" class="list-group-item"> {{ etudiant.nom}} </a>
+                     {% endfor %}
+                           
+                            </ul>
+                        </div>
+                    </div>
+     </div>
+ {#% endif %#}  
+
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN') %#}
+     <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tuteurs</h5>
+                            <ul class="list-group list-group-flush">
+                     {% for tuteur in tuteurs %} 
+                            <a href="javascript:void(0);" class="list-group-item"> {{ tuteur.nom}} </a>
+                     {% endfor %}
+                           
+                            </ul>
+                        </div>
+                    </div>
+     </div>   
+{#% endif %#} 
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN') %#}
+    <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Intervenants</h5>
+                            <ul class="list-group list-group-flush">
+                       
+                           	{% for intervenant in intervenants %}
+                                      
+                                      <a href="{{path('app_intervenants_show',{id:intervenant.id})}}" class="list-group-item">{{intervenant.nom}}</a>
+						        
+                            {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+    </div>
+{#% endif %#}  
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
+ <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Classe</h5>
+                            <ul class="list-group list-group-flush">
+                        {#{ user.classe.nom }#}
+                           {% for classe in classes %}
+                           <a href="{{path('app_classes_show',{id:classe.id})}}" class="list-group-item"> {{classe.nom}} </a>
+                           {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+</div>
+{#% endif %#} 
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
+          <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Modules</h5>
+                            <ul class="list-group list-group-flush">
+                       
+                           
+                            </ul>
+                        </div>
+                    </div>
+          </div>
+{#% endif %#} 
+
+{#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}
+ <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Bloc</h5>
+                            <ul class="list-group list-group-flush">
+                            {% for bloc in user.blocs %}
+                                    {{ bloc.nom }}
+                            {% endfor %}
+                           
+                            </ul>
+                        </div>
+                    </div>
+ </div>
+ {#% endif %#}      
+
+
+ {#% if is_granted('ROLE_ETUDIANT','ROLE_ADMIN','ROLE_INTERVENANT') %#}       
+    <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Graphe d'assiduité</h5>
+                            <ul class="list-group list-group-flush">
+                       
+                           
+                            </ul>
+                        </div>
+                    </div>
+    </div>
+{#% endif %#} 
+
             </div>
             </div>
     {{ block("Footer", "Menus/Footer.html.twig") }}

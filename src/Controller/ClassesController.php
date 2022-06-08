@@ -5,15 +5,16 @@ namespace App\Controller;
 use App\Entity\Classes;
 use App\Entity\Modules;
 use App\Form\ClassesType;
+use App\Repository\UsersRepository;
 use App\Repository\ClassesRepository;
 use App\Repository\ModulesRepository;
-use App\Repository\IntervenantsRepository;
 use App\Repository\EtudiantsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\IntervenantsRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/classes")
@@ -63,15 +64,15 @@ class ClassesController extends AbstractController
     /**
      * @Route("/{id}", name="app_classes_show", methods={"GET"})
      */
-    public function show(Classes $class,ModulesRepository $modulesRepository,IntervenantsRepository $intervenantsRepository,EtudiantsRepository $etudiantsRepository): Response
+    public function show(Classes $class,ModulesRepository $modulesRepository,UsersRepository $intervenantsRepository,UsersRepository $etudiantsRepository): Response
     {
   
 
         return $this->render('classes/show.html.twig', [
             'class' => $class,
             'modules' => $modulesRepository->findBy(array('classes'=>$class)),
-            'intervenants' => $intervenantsRepository->findBy(array('classes'=>$class)),
-            'etudiants' => $etudiantsRepository->findBy(array('classes'=>$class)),
+            'intervenants' => $intervenantsRepository->findByIntervenant(),
+            'etudiants' => $etudiantsRepository->findByEtudiant(),
         
         ]);
     }
