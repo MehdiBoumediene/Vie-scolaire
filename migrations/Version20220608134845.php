@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220605134158 extends AbstractMigration
+final class Version20220608134845 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -75,6 +75,11 @@ final class Version20220605134158 extends AbstractMigration
         $this->addSql('ALTER TABLE users ADD CONSTRAINT FK_1483A5E9A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
         $this->addSql('ALTER TABLE users_classes ADD CONSTRAINT FK_F2ED0A0F67B3B43D FOREIGN KEY (users_id) REFERENCES users (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE users_classes ADD CONSTRAINT FK_F2ED0A0F9E225B24 FOREIGN KEY (classes_id) REFERENCES classes (id) ON DELETE CASCADE');
+        $this->addSql('DROP TABLE files');
+        $this->addSql('DROP TABLE telechargements');
+        $this->addSql('ALTER TABLE parcours ADD parcour_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE parcours ADD CONSTRAINT FK_99B1DEE39A561E99 FOREIGN KEY (parcour_id) REFERENCES users (id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_99B1DEE39A561E99 ON parcours (parcour_id)');
     }
 
     public function down(Schema $schema): void
@@ -112,10 +117,13 @@ final class Version20220605134158 extends AbstractMigration
         $this->addSql('ALTER TABLE messages DROP FOREIGN KEY FK_DB021E96F624B39D');
         $this->addSql('ALTER TABLE messages DROP FOREIGN KEY FK_DB021E96E92F8F78');
         $this->addSql('ALTER TABLE modules DROP FOREIGN KEY FK_2EB743D767B3B43D');
+        $this->addSql('ALTER TABLE parcours DROP FOREIGN KEY FK_99B1DEE39A561E99');
         $this->addSql('ALTER TABLE reset_password_request DROP FOREIGN KEY FK_7CE748AA76ED395');
         $this->addSql('ALTER TABLE tuteurs DROP FOREIGN KEY FK_5831674367B3B43D');
         $this->addSql('ALTER TABLE users DROP FOREIGN KEY FK_1483A5E9A76ED395');
         $this->addSql('ALTER TABLE users_classes DROP FOREIGN KEY FK_F2ED0A0F67B3B43D');
+        $this->addSql('CREATE TABLE files (id INT AUTO_INCREMENT NOT NULL, module_id INT DEFAULT NULL, telechargements_id INT DEFAULT NULL, name VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, nom VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, INDEX IDX_63540591536CC8D (telechargements_id), INDEX IDX_6354059AFC2B591 (module_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
+        $this->addSql('CREATE TABLE telechargements (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, classe_id INT DEFAULT NULL, name VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, nom VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, created_at DATETIME DEFAULT NULL, INDEX IDX_623AB0778F5EA509 (classe_id), INDEX IDX_623AB077A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
         $this->addSql('DROP TABLE absences');
         $this->addSql('DROP TABLE absences_etudiants');
         $this->addSql('DROP TABLE absences_intervenants');
@@ -135,5 +143,7 @@ final class Version20220605134158 extends AbstractMigration
         $this->addSql('DROP TABLE users');
         $this->addSql('DROP TABLE users_classes');
         $this->addSql('DROP TABLE messenger_messages');
+        $this->addSql('DROP INDEX UNIQ_99B1DEE39A561E99 ON parcours');
+        $this->addSql('ALTER TABLE parcours DROP parcour_id');
     }
 }

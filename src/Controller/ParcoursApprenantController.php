@@ -23,7 +23,7 @@ class ParcoursApprenantController extends AbstractController
         ]);
     }
       /**
-     * @Route("/new", name="app_parcours_apprenant_new", methods={"GET", "POST"})
+     * @Route("/parcours/apprenant/new", name="app_parcours_apprenant_new", methods={"GET", "POST"})
      */
     public function new(Request $request, ParcoursRepository $parcoursRepository): Response
     {
@@ -42,7 +42,7 @@ class ParcoursApprenantController extends AbstractController
         ]);
     }
      /**
-     * @Route("/{id}", name="app_parcours_apprenant_show", methods={"GET"})
+     * @Route("/parcours/apprenant/{id}", name="app_parcours_apprenant_show", methods={"GET"})
      */
     public function show(Parcours $parcour): Response
     {
@@ -52,7 +52,7 @@ class ParcoursApprenantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_parcours_apprenant_edit", methods={"GET", "POST"})
+     * @Route("/parcours/apprenant/{id}/edit", name="app_parcours_apprenant_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Parcours $parcour, ParcoursRepository $parcoursRepository): Response
     {
@@ -72,7 +72,7 @@ class ParcoursApprenantController extends AbstractController
     }
 
    /**
-     * @Route("/{id}", name="app_parcours_apprenant_delete", methods={"POST"})
+     * @Route("/parcours/apprenant/{id}", name="app_parcours_apprenant_delete", methods={"POST"})
      */
     public function delete(Request $request, Parcours $parcour, ParcoursRepository $parcoursRepository): Response
     {
