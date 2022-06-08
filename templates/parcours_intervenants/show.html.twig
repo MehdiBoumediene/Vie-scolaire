@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parcours{% endblock %}
+
+{% block body %}
+             
+                {{ block("MenuTop", "Menus/MenuTop.html.twig") }}
+ <div class="app-main">
+                 {{ block("MenuLeft", "Menus/MenuLeft.html.twig") }}
+
+<div class="app-main__outer">
+                <div class="app-main__inner">
+
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                              
+                                <div class="page-title-icon">
+                                    <i class="lnr-users icon-gradient bg-strong-bliss"></i>
+                                </div>
+                                
+                                <div>Parcours Professionnelles
+                                    <div class="page-title-subheading">Découvrez le Parcours Professionnelle de cet utilisateur</div>
+                                </div>
+                           
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="tabs-animation"> 
+                <div class="main-card mb-3 card">
+    
+    <div class="card-body">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+               <div class="main-card mb-3 card">
+                        <div class="card-body">
+                        <div class="photo" align="center">
+                           <img src="#" alt="photo de profil">
+                        </div>
+                        <br>
+                        <br>
+                            <h5 class="card-title" align="center"> 
+                             <p> {#{user.nom}}  {{user.prenom}#} GIRAUD Pierre</p>
+                             </h5>
+                            <ul class="list-group list-group-flush" align="center">
+                                      Bio About User
+                            </ul>
+                        </div>
+                    </div>    
+
+                       <div class="main-card mb-3 card">
+                        <div class="card-body">
+                       <h5 class="card-title"> Informations Personnelles </h5>
+                        <br>
+                            <ul class="list-group list-group-flush" >
+                                              
+                           <b>  <p>Adresse : </b>  <br> 
+                            {#{user.adresse}#} 115 Avenue des Lilas - 83000 Toulon</b><br>
+                           <b>  Téléphone :</b><br>
+                             {#{user.telephone}#} 06 36 65 65 65
+                             <br>
+                         <b> Email :  </b>
+                         <br>
+                              {#{user.email}#} pierre.giraud@ifde-learning.com </p>
+                           
+                            </ul>
+                        </div>
+                    </div>  
+
+
+
+              <div class="main-card mb-3 card">
+                        <div class="card-body">
+                      
+                        <br>
+                        <br>
+                            <h5 class="card-title"> 
+                             <p> Expériences professionnelles</p>
+                             </h5>
+                            <ul class="list-group list-group-flush">
+                                    <div class="exp-info">
+                                        <h6>Créateur</h6>
+                                        <p>Pierre Giraud</p>
+                                        <p>Avril 2014 - Aujourd'hui</p>
+                                    </div>
+                           
+
+                                    <div class="exp-info">
+                                        <h6>Créateur</h6>
+                                        <p>Pierre Giraud</p>
+                                        <p>Avril 2014 - Aujourd'hui</p>
+                                    </div>
+
+                                     <div class="exp-info">
+                                        <h6>Créateur</h6>
+                                        <p>Pierre Giraud</p>
+                                        <p>Avril 2014 - Aujourd'hui</p>
+                                    </div>
+                            </ul>
+                        </div>
+                    </div>    
+
+
+
+ <div class="main-card mb-3 card">
+                        <div class="card-body">
+                      
+                        <br>
+                        <br>
+                            <h5 class="card-title"> 
+                             <p> Formation</p>
+                             </h5>
+                            <ul class="list-group list-group-flush">
+                                    <div class="exp-info">
+                                        <h6> Créateur</h6>
+                                        <p>Pierre Giraud</p>
+                                        <p>Avril 2014 - Aujourd'hui</p>
+                                    </div>
+                           
+                            </ul>
+                        </div>
+                    </div>    
+
+
+           </div>                    
+        </div>
+     </div>                  
+  </div>                 
+</div>                   
+
+
+
+{{ block("Footer", "Menus/Footer.html.twig") }}
+{% endblock %}

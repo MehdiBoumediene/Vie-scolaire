@@ -34,3 +34,9 @@ a {
 {
   display : none;
 }
+p{
+  font-size: 1em;
+  line-height: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+}

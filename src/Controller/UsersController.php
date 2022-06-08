@@ -131,15 +131,4 @@ class UsersController extends AbstractController
         return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
     }
 
-
-  /**
-     * @Route("/{id}", name="app_users_showparcours", methods={"GET"})
-     */
-    public function showParcours(Users $user)
-    {
-
-        return $this->render('users/parcours.html.twig', [
-            'user' => $user]);
-
-    }
 }
