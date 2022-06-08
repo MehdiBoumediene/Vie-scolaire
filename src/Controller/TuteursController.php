@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Tuteurs;
 use App\Form\TuteursType;
+use App\Repository\UsersRepository;
 use App\Repository\TuteursRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/tuteurs")
@@ -53,10 +54,11 @@ class TuteursController extends AbstractController
     /**
      * @Route("/{id}", name="app_tuteurs_show", methods={"GET"})
      */
-    public function show(Tuteurs $tuteur): Response
+    public function show(Tuteurs $tuteur,UsersRepository $etudiantsRepository): Response
     {
         return $this->render('tuteurs/show.html.twig', [
             'tuteur' => $tuteur,
+            'etudiants' => $etudiantsRepository->findByEtudiant(),
         ]);
     }
 

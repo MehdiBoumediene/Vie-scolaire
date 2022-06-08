@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Blocs;
+use App\Entity\Classes;
 use App\Form\BlocsType;
 use App\Repository\BlocsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ModulesRepository;
+use App\Repository\ClassesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/blocs")
@@ -54,10 +57,13 @@ class BlocsController extends AbstractController
     /**
      * @Route("/{id}", name="app_blocs_show", methods={"GET"})
      */
-    public function show(Blocs $bloc): Response
+    public function show(Blocs $bloc,ModulesRepository $modulesRepository,BlocsRepository $blocsRepository): Response
     {
         return $this->render('blocs/show.html.twig', [
             'bloc' => $bloc,
+            'modules' => $modulesRepository->findBy(array('bloc'=>$bloc)),
+        
+    
         ]);
     }
 
