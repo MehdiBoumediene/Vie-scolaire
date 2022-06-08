@@ -45,22 +45,19 @@ class AbsencesRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Absences[] Returns an array of Absences objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByUser($user)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('a.user = :val')
+            ->setParameter('val', $user)
             ->orderBy('a.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Absences
