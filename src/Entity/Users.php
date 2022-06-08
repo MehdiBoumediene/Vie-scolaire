@@ -159,7 +159,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private $absences;
 
 
-
+  /**
+     * @ORM\OneToMany(targetEntity=Telechargements::class, mappedBy="user")
+     */
+    private $telechargements;
 
    
 
@@ -178,6 +181,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->classe = new ArrayCollection();
         $this->calendriers = new ArrayCollection();
         $this->absences = new ArrayCollection();
+        $this->telechargements = new ArrayCollection();
  
      
        
@@ -748,7 +752,35 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     
-   
+    /**
+     * @return Collection<int, Telechargements>
+     */
+    public function getTelechargements(): Collection
+    {
+        return $this->telechargements;
+    }
+
+    public function addTelechargement(Telechargements $telechargement): self
+    {
+        if (!$this->telechargements->contains($telechargement)) {
+            $this->telechargements[] = $telechargement;
+            $telechargement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTelechargement(Telechargements $telechargement): self
+    {
+        if ($this->telechargements->removeElement($telechargement)) {
+            // set the owning side to null (unless already changed)
+            if ($telechargement->getUser() === $this) {
+                $telechargement->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
    
 }

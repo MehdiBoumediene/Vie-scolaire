@@ -76,6 +76,11 @@ class Modules
      */
     private $calendriers;
 
+      /**
+     * @ORM\OneToMany(targetEntity=Files::class, mappedBy="module", cascade={"all"})
+     */
+    private $files;
+
 
 
    
@@ -88,6 +93,7 @@ class Modules
         $this->absences = new ArrayCollection();
         $this->documents = new ArrayCollection();
         $this->calendriers = new ArrayCollection();
+        $this->files = new ArrayCollection();
         
     }
 
@@ -312,7 +318,35 @@ class Modules
         return $this;
     }
 
+ /**
+     * @return Collection<int, Files>
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
 
+    public function addFile(Files $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setModule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(Files $file): self
+    {
+        if ($this->files->removeElement($file)) {
+            // set the owning side to null (unless already changed)
+            if ($file->getModule() === $this) {
+                $file->setModule(null);
+            }
+        }
+
+        return $this;
+    }
 
   
 
