@@ -37,6 +37,11 @@ class Parcours
      */
     private $education;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Users::class, cascade={"persist", "remove"})
+     */
+    private $parcour;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Parcours
     public function setEducation(?string $education): self
     {
         $this->education = $education;
+
+        return $this;
+    }
+
+    public function getParcour(): ?Users
+    {
+        return $this->parcour;
+    }
+
+    public function setParcour(?Users $parcour): self
+    {
+        $this->parcour = $parcour;
 
         return $this;
     }
