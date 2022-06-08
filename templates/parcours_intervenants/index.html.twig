@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Parcours Intervenant {% endblock %}
+
+{% block body %}
+
+
+
+                {{ block("MenuTop", "Menus/MenuTop.html.twig") }}
+      <div class="app-main">
+                 {{ block("MenuLeft", "Menus/MenuLeft.html.twig") }}
+
+      <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="lnr-users icon-gradient bg-strong-bliss"></i>
+                                </div>
+                                <div>Parcours Professionnelles
+                                    <div class="page-title-subheading">Découvrez le Parcours Professionnelle de cet utilisateur</div>
+                                </div>
+                            </div>
+
+    <div class="page-title-actions">
+                        
+                            <div class="d-inline-block dropdown">
+                            <a href="{{path('app_parcours_intervenants_new')}}">
+                                <button  class="btn-shadow btn btn-success">
+                                    <span class="btn-icon-wrapper pr-2 opacity-7">
+                                        <i class="fa fa-plus fa-w-20"></i>
+                                    </span>
+                                    Ajouter un Parcours
+                                </button>
+                               </a>
+                            </div>
+                        </div>
+                     </div>
+                     </div>
+                     
+     <div class="tabs-animation"> 
+    <div class="main-card mb-3 card">
+    
+    <div class="card-body">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+            <div class="row">
+                <div class="col-sm-12">
+              <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Nom </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 106.2px;" aria-label="Office: activate to sort column ascending">Bio</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Experience Pro</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Compétence Pro</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 233.2px;" aria-label="Position: activate to sort column ascending">Education</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 110.2px;" aria-label="Start date: activate to sort column ascending">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for parcour in parcours %}
+                             <tr role="row" class="odd">
+
+                                    <td class="sorting_1 dtr-control"><a href="{{ path('app_parcours_intervenants_show', {'id': parcour.id}) }}"> {{ parcour.id }}</a></td>
+                                    <td class="sorting_1 dtr-control"> {{ parcour.bio }} </td>
+                                    <td class="sorting_1 dtr-control"> {{ parcour.experiencePro }} </td>
+                                    <td class="sorting_1 dtr-control"> {{ parcour.competence }} </td>
+                                    <td class="sorting_1 dtr-control"> {{ parcour.education }} </td>
+                                    <td class="sorting_1 dtr-control"> 
+                                           <a href="{{ path('app_parcours_intervenants_show', {'id': parcour.id}) }}">Détails </a> <br>
+                                           <a href="{{ path('app_parcours_intervenants_edit', {'id': parcour.id}) }}">Modifier</a>
+                                    </td>             
+
+                            
+                             </tr> 
+                        {% else %}
+                              <tr>
+                                    <td colspan="6">Aucun Résultat </td>
+                               </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                 </div> 
+                   
+              </div> 
+               
+           </div>                    
+        </div>
+     </div>                  
+  </div>                 
+</div>                   
+
+
+
+
+{{ block("Footer", "Menus/Footer.html.twig") }}
+{% endblock %}
